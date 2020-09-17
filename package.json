@@ -1,0 +1,30 @@
+{
+  "name": "breakaway",
+  "version": "1.0.0",
+  "description": "An app that increases productivity by helping create a culture and community of taking breaks. Track employee PTO and share employee experiences across the company with this fun and seamless user experience.",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MVC-5/breakaway.git"
+  },
+  "author": "Josh, Caleb, Jon, Dan, Luke",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/MVC-5/breakaway/issues"
+  },
+  "homepage": "https://github.com/MVC-5/breakaway#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "express-handlebars": "^5.1.0",
+    "mysql2": "^2.1.0",
+    "sequelize": "^6.3.5"
+  },
+  "devDependencies": {
+    "eslint": "^7.9.0",
+    "eslint-config-airbnb-base": "^14.2.0",
+    "eslint-plugin-import": "^2.22.0"
+  }
+}
