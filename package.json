@@ -4,8 +4,11 @@
   "description": "An app that increases productivity by helping create a culture and community of taking breaks. Track employee PTO and share employee experiences across the company with this fun and seamless user experience.",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon server"
+    "test": "npm run lint",
+    "start": "node server.js",
+    "lint": "eslint --quiet .",
+    "fix": "eslint --fix .",
+    "watch": "nodemon server.js"
   },
   "repository": {
     "type": "git",
