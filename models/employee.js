@@ -19,24 +19,24 @@ module.exports = function (sequelize, DataTypes) {
       allowNull: false,
       references: {
         model: 'roles',
-        key: 'id'
-      }
+        key: 'id',
+      },
     },
     dept_id: {
       type: DataTypes.INTEGER,
       allowNull: false,
       references: {
         model: 'departments',
-        key: 'id'
-      }
+        key: 'id',
+      },
     },
     manager_id: {
       type: DataTypes.INTEGER,
       allowNull: false,
       references: {
         model: 'employees',
-        key: 'id'
-      }
+        key: 'id',
+      },
     },
     bank: {
       type: DataTypes.INTEGER,

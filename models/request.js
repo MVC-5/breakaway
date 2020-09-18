@@ -11,8 +11,8 @@ module.exports = function (sequelize, DataTypes) {
       allowNull: false,
       references: {
         model: 'employees',
-        key: 'id'
-      }
+        key: 'id',
+      },
     },
     start: {
       type: DataTypes.DATEONLY,
@@ -27,8 +27,8 @@ module.exports = function (sequelize, DataTypes) {
       allowNull: false,
       references: {
         model: 'employees',
-        key: 'manager_id'
-      }
+        key: 'manager_id',
+      },
     },
     reason: {
       type: DataTypes.STRING,
