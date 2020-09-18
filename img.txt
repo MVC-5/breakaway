@@ -1,0 +1,8 @@
+cloudname: breakbreakaway
+api key: 496689558829542
+
+sample upload: 
+cloudinary.uploader.upload("sample.jpg", {"crop":"limit","tags":"samples","width":3000,"height":2000}, function(result) { console.log(result) });
+
+sample manipulation: 
+cloudinary.image("sample", {"crop":"fill","gravity":"faces","width":300,"height":200,"format":"jpg"});
