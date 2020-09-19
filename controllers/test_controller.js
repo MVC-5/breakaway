@@ -22,8 +22,8 @@ const upload = multer({ storage, fileFilter: imageFilter });
 
 cloudinary.config({
   cloud_name: 'breakbreakaway',
-  api_key: '', // get this from cloudinary,
-  api_secret: '', // get this from cloudinary,
+  api_key: '496689558829542',
+  api_secret: 'hiding this for security reasons'
 });
 
 // get root route
@@ -38,7 +38,9 @@ router.get('/', (req, res) => {
 router.post('/api/upload', upload.single('image'), (req, res) => {
   console.log(req.body);
 
-  cloudinary.uploader.upload(req.file.path, (result) => {
+  cloudinary.v2.uploader.upload(req.file.path,  { width: 350, height: 350, crop: "limit" }, (err, result) => {
+
+    console.log(err, result);
     // add cloudinary url for the image to the campground object under image property
     const imageUrl = result.secure_url;
 
