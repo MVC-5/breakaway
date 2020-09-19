@@ -1,11 +1,6 @@
-module.exports = function (sequelize, DataTypes) {
+module.exports = (sequelize, DataTypes) => {
+  // id is created by sequelize
   const Employee = sequelize.define('employee', {
-    id: {
-      type: DataTypes.INTEGER,
-      primaryKey: true,
-      autoIncrement: true,
-      allowNull: false,
-    },
     employee_first: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -24,17 +19,29 @@ module.exports = function (sequelize, DataTypes) {
     },
   });
 
-  Employee.associate = function (models) {
+  Employee.associate = (models) => {
     Employee.belongsTo(models.role, {
       foreignKey: 'role_id',
     });
 
-    Employee.belongsTo(models.department, {
-      foreignKey: 'dept_id',
+    // Employee.belongsTo(models.manager, {
+    //   foreignKey: 'manager_id',
+    //   constraints: false,
+    // });
+
+    Employee.hasMany(Employee, {
+      as: 'manager',
+      foreignKey: 'manager_id',
+});
+
+    Employee.hasMany(models.request, {
+      onUpdate: 'cascade',
+      onDelete: 'cascade',
     });
 
-    Employee.belongsTo(models.manager, {
-      foreignKey: 'manager_id',
+    Employee.hasMany(models.feed, {
+      onUpdate: 'cascade',
+      onDelete: 'cascade',
     });
   };
 

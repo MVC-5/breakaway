@@ -1,15 +1,5 @@
-module.exports = function (sequelize, DataTypes) {
+module.exports = (sequelize, DataTypes) => {
   const Post = sequelize.define('feed', {
-    id: {
-      type: DataTypes.INTEGER,
-      primaryKey: true,
-      autoIncrement: true,
-    },
-    time_posted: {
-      type: DataTypes.TIMESTAMP,
-      defaultvalue: sequelize.literal('CURRENT_TIMESTAMP'),
-      allowNull: false,
-    },
     description: {
       type: DataTypes.STRING(300),
       allowNull: false,
@@ -20,7 +10,7 @@ module.exports = function (sequelize, DataTypes) {
     },
   });
 
-  Post.associate = function (models) {
+  Post.associate = (models) => {
     Post.belongsTo(models.employee, {
       foreignKey: 'employee_id',
     });

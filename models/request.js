@@ -1,11 +1,5 @@
-module.exports = function (sequelize, DataTypes) {
+module.exports = (sequelize, DataTypes) => {
   const Request = sequelize.define('request', {
-    id: {
-      type: DataTypes.INTEGER,
-      primaryKey: true,
-      autoIncrement: true,
-      allowNull: false,
-    },
     start: {
       type: DataTypes.DATEONLY,
       allowNull: false,
@@ -25,14 +19,14 @@ module.exports = function (sequelize, DataTypes) {
     },
   });
 
-  Request.associate = function (models) {
+  Request.associate = (models) => {
     Request.belongsTo(models.employee, {
       foreignKey: 'employee_id',
     });
 
-    Request.belongsTo(models.manager, {
-      foreignKey: 'manager_id',
-    });
+    // Request.belongsTo(models.manager, {
+    //   foreignKey: 'manager_id',
+    // });
   };
 
   return Request;
