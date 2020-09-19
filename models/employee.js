@@ -1,5 +1,5 @@
 module.exports = function (sequelize, DataTypes) {
-  const Employee = sequelize.define('employees', {
+  const Employee = sequelize.define('employee', {
     id: {
       type: DataTypes.INTEGER,
       primaryKey: true,
@@ -14,34 +14,30 @@ module.exports = function (sequelize, DataTypes) {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    role_id: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      references: {
-        model: 'roles',
-        key: 'id',
-      },
-    },
-    dept_id: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      references: {
-        model: 'departments',
-        key: 'id',
-      },
-    },
-    manager_id: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      references: {
-        model: 'employees',
-        key: 'id',
-      },
+    email: {
+      type: DataTypes.STRING,
+      allowNull: false
     },
     bank: {
       type: DataTypes.INTEGER,
       allowNull: false,
     },
   });
+
+  Employee.associate = function (models) {
+
+    Employee.belongsTo(models.role, {
+      foreignKey: 'role_id'
+    });
+
+    Employee.belongsTo(models.department, {
+      foreignKey: 'dept_id'
+    });
+
+    Employee.belongsTo(models.manager, {
+      foreignKey: 'manager_id'
+    });
+  };
+
   return Employee;
 };

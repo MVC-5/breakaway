@@ -1,18 +1,10 @@
 module.exports = function (sequelize, DataTypes) {
-  const Request = sequelize.define('requests', {
+  const Request = sequelize.define('request', {
     id: {
       type: DataTypes.INTEGER,
       primaryKey: true,
       autoIncrement: true,
       allowNull: false,
-    },
-    employee_id: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      references: {
-        model: 'employees',
-        key: 'id',
-      },
     },
     start: {
       type: DataTypes.DATEONLY,
@@ -21,14 +13,6 @@ module.exports = function (sequelize, DataTypes) {
     end: {
       type: DataTypes.DATEONLY,
       allowNull: false,
-    },
-    manager_id: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      references: {
-        model: 'employees',
-        key: 'manager_id',
-      },
     },
     reason: {
       type: DataTypes.STRING,
@@ -40,5 +24,17 @@ module.exports = function (sequelize, DataTypes) {
       defaultValue: null,
     },
   });
+
+  Request.associate = function (models) {
+
+    Request.belongsTo(models.employee, {
+      foreignKey: 'employee_id'
+    });
+
+    Request.belongsTo(models.manager, {
+      foreignKey: 'manager_id'
+    });
+  };
+
   return Request;
 };

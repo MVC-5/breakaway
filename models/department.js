@@ -1,21 +1,16 @@
 module.exports = function (sequelize, DataTypes) {
-  const Role = sequelize.define('roles', {
+  const Department = sequelize.define('department', {
     id: {
       type: DataTypes.INTEGER,
       autoIncrement: true,
+      primaryKey: true,
       allowNull: false,
     },
-    title: {
+    name: {
       type: DataTypes.STRING(50),
       allowNull: false,
     },
 
-    department_id: {
-      type: DataTypes.INTEGER,
-      autoIncrement: false,
-      allowNull: false,
-    },
-
   });
-  return Role;
+  return Department;
 };

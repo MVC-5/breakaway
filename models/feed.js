@@ -1,12 +1,9 @@
 module.exports = function (sequelize, DataTypes) {
-  const Vacationpost = sequelize.define('feed', {
+  const Post = sequelize.define('feed', {
     id: {
       type: DataTypes.INTEGER,
+      primaryKey: true,
       autoIncrement: true,
-    },
-    employee_id: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
     },
     time_posted: {
       type: DataTypes.TIMESTAMP,
@@ -16,15 +13,20 @@ module.exports = function (sequelize, DataTypes) {
     description: {
       type: DataTypes.STRING(300),
       allowNull: false,
-
     },
-
     pic_link: {
       type: DataTypes.STRING(200),
       allowNull: false,
-
     },
-
   });
-  return Vacationpost;
+
+  Post.associate = function (models) {
+
+    Post.belongsTo(models.employee, {
+      foreignKey: 'employee_id'
+    });
+
+  };
+
+  return Post;
 };
