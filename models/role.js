@@ -13,11 +13,9 @@ module.exports = function (sequelize, DataTypes) {
   });
 
   Role.associate = function (models) {
-
     Role.belongsTo(models.department, {
-      foreignKey: 'dept_id'
+      foreignKey: 'dept_id',
     });
-
   };
   return Role;
 };

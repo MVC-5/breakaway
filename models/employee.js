@@ -16,7 +16,7 @@ module.exports = function (sequelize, DataTypes) {
     },
     email: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: false,
     },
     bank: {
       type: DataTypes.INTEGER,
@@ -25,17 +25,16 @@ module.exports = function (sequelize, DataTypes) {
   });
 
   Employee.associate = function (models) {
-
     Employee.belongsTo(models.role, {
-      foreignKey: 'role_id'
+      foreignKey: 'role_id',
     });
 
     Employee.belongsTo(models.department, {
-      foreignKey: 'dept_id'
+      foreignKey: 'dept_id',
     });
 
     Employee.belongsTo(models.manager, {
-      foreignKey: 'manager_id'
+      foreignKey: 'manager_id',
     });
   };
 

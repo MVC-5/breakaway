@@ -16,12 +16,10 @@ module.exports = function (sequelize, DataTypes) {
     });
 
     Manager.associate = function (models) {
-
         Manager.belongsTo(models.employee, {
-            foreignKey: 'employee_id'
+            foreignKey: 'employee_id',
         });
-
     };
 
     return Manager;
-}; 
+};

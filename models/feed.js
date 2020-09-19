@@ -21,11 +21,9 @@ module.exports = function (sequelize, DataTypes) {
   });
 
   Post.associate = function (models) {
-
     Post.belongsTo(models.employee, {
-      foreignKey: 'employee_id'
+      foreignKey: 'employee_id',
     });
-
   };
 
   return Post;

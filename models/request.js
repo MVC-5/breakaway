@@ -26,13 +26,12 @@ module.exports = function (sequelize, DataTypes) {
   });
 
   Request.associate = function (models) {
-
     Request.belongsTo(models.employee, {
-      foreignKey: 'employee_id'
+      foreignKey: 'employee_id',
     });
 
     Request.belongsTo(models.manager, {
-      foreignKey: 'manager_id'
+      foreignKey: 'manager_id',
     });
   };
 
