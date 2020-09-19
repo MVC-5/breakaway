@@ -27,7 +27,7 @@ module.exports = (sequelize, DataTypes) => {
     Employee.hasMany(Employee, {
       as: 'manager',
       foreignKey: 'manager_id',
-});
+    });
 
     Employee.hasMany(models.request, {
       onUpdate: 'cascade',
