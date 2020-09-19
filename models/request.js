@@ -21,7 +21,7 @@ module.exports = (sequelize, DataTypes) => {
 
   Request.associate = (models) => {
     Request.belongsTo(models.employee, {
-      foreignKey: 'employee_id',
+      foreignKey: 'employeeId',
     });
   };
 
