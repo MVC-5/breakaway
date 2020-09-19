@@ -14,8 +14,9 @@ INSERT INTO roles
 VALUES
     ('Manager', ),
     ('Tech. Support'),
-    (),
-    ();
+    ('Designer'),
+    ('Tester'),
+    ('Sales Associate');
 
 INSERT INTO employees
     (employee_first, employee_last, role_id, dept_id, manager_id, bank)
