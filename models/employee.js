@@ -24,11 +24,6 @@ module.exports = (sequelize, DataTypes) => {
       foreignKey: 'role_id',
     });
 
-    // Employee.belongsTo(models.manager, {
-    //   foreignKey: 'manager_id',
-    //   constraints: false,
-    // });
-
     Employee.hasMany(Employee, {
       as: 'manager',
       foreignKey: 'manager_id',

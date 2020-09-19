@@ -23,10 +23,6 @@ module.exports = (sequelize, DataTypes) => {
     Request.belongsTo(models.employee, {
       foreignKey: 'employee_id',
     });
-
-    // Request.belongsTo(models.manager, {
-    //   foreignKey: 'manager_id',
-    // });
   };
 
   return Request;

@@ -1,4 +1,4 @@
-module.exports = function (sequelize, DataTypes) {
+module.exports = (sequelize, DataTypes) => {
   const Role = sequelize.define('role', {
     title: {
       type: DataTypes.STRING(50),
@@ -6,7 +6,7 @@ module.exports = function (sequelize, DataTypes) {
     },
   });
 
-  Role.associate = function (models) {
+  Role.associate = (models) => {
     Role.belongsTo(models.department, {
       foreignKey: 'dept_id',
     });

@@ -8,6 +8,10 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING(200),
       allowNull: false,
     },
+    location: {
+      type: DataTypes.STRING(200),
+      allowNull: false,
+    },
   });
 
   Post.associate = (models) => {
