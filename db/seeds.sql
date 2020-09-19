@@ -28,6 +28,10 @@ VALUES
     ('Renita', 'Panos', 1, 1, 1),
     ('Walter', 'Ray', 1, 1, 1),
     ('Ann', 'Marte', 1, 1, 1),
+    ('Frank', 'Folkes', 1, 1, 1),
+    ('Sandra', 'Rodriguez', 1, 1, 1),
+    ('Mark', 'Ayers', 1, 1, 1),
+    ('Ila', 'Womack', 1, 1, 1),
     ('Drew', 'Schofield', 1, 1, 1);
 
 INSERT INTO request
