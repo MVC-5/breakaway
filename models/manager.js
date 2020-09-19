@@ -11,9 +11,6 @@ module.exports = (sequelize, DataTypes) => {
         Manager.belongsTo(models.employee, {
             foreignKey: 'employee_id',
         });
-        // Manager.hasMany(models.employee, {
-        //     constraints: false,
-        // });
     };
 
     return Manager;
