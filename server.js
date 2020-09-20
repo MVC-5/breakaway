@@ -75,16 +75,16 @@ app.post('/send', (req, res) => {
       // secure: false, // true for 465, false for other ports
       service: 'gmail',
       auth: {
-        user: 'dev.breakaway@gmail.com', // gmail user - implement npm dotenv + .env file
-        pass: 'mvc-5-breakaway', // gmail password - implement npm dotenv + .env file
+        user: '', // gmail user - implement npm dotenv + .env file
+        pass: '', // gmail password - implement npm dotenv + .env file
       },
     });
 
     // send mail with defined transport object
     let info = await transporter.sendMail({
-      from: 'dev.breakaway@gmail.com', // sender address
-      to: "jonathan.martb@gmail.com", // list of receivers
-      cc: "dev.breakaway@gmail.com",
+      from: '', // sender address
+      to: "", // list of receivers
+      cc: "",
       subject: "Hello Dev!", // Subject line
       text: "This is a breakaway test", // plain text body
       html: output, // html body
