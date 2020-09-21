@@ -19,8 +19,19 @@ app.get('/index', (req, res) => {
   res.render('index');
 });
 
+app.get('/api/login', (req, res) => {
+  if (req.query.id === '7') {
+    res.send('succes');
+  } else throw Error;
+});
+
+// this will need to get employee info to put in template
 app.get('/request', (req, res) => {
   res.render('request');
+});
+
+app.get('/manager', (req, res) => {
+  res.render('manager');
 });
 
 // Syncing our database and logging a message to the user upon success

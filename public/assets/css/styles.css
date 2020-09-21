@@ -191,7 +191,7 @@ p {
   display: block;
   text-align: center;
   width: 350px;
-  margin: .5rem auto;
+  margin: .5rem auto 4rem;
 }
 
 .form-group {
@@ -308,11 +308,30 @@ td.t-denied {
   padding-bottom: .5rem;
 }
 
+
+/* nav partial */
+.nav {
+  display: flex;
+  justify-content: flex-end;
+  margin: 15px 25px;
+}
+
+.nav-item {
+  font-weight: 500;
+  padding: 10px;
+  margin: 0;
+  text-decoration: none;
+}
+
+.nav-item:hover {
+  filter: brightness(140%);
+}
+
 /* request page */
 
 .request-header {
   text-align: center;
-  margin: 50px;
+  margin: 50px auto 4rem;
 }
 
 .request-p {
@@ -323,9 +342,30 @@ td.t-denied {
 
 .request-hr {
   width: 350px;
-  margin: 2px auto;
+  margin: 2px auto 1rem;
 }
 
+/* calendar partial */
+.calendar {
+  width: 350px;
+  margin: 0 auto;
+}
+
+.month {
+  font-weight: 500;
+}
+
+.calendar li {
+  text-align: center;
+  padding: 10px;
+}
+
+.sales {
+  background-color: blue;
+}
+.devs {
+  background-color: green;
+}
 
 /* media queries */
 @media only screen 
