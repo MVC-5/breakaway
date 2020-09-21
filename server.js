@@ -11,6 +11,10 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(express.static('public'));
 
+app.get('/', (req, res) => res.send('INDEX'));
+
+app.use('/routes', require('./routes/routes'));
+
 // Syncing our database and logging a message to the user upon success
 db.sequelize.sync({ force: true }).then(() => {
   app.listen(PORT, () => {
