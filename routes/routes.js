@@ -11,8 +11,14 @@ module.exports = (app) => {
   // Do a JOIN with employees foreign Key is managerID
   app.get('/api/requests/manager', (req, res) => {
     db.request.findAll({
-      where: {
-        manager_id: 2,
+
+      include: {
+        model: db.employee,
+        where: {
+
+          manager_id: 2,
+
+        },
       },
     }).then((results) => {
       res.json(results);
@@ -22,7 +28,7 @@ module.exports = (app) => {
   app.get('/api/requests/employee', (req, res) => {
     db.request.findAll({
       where: {
-        employee_id: 2,
+        employeeId: 2,
       },
     }).then((results) => {
       res.json(results);
@@ -39,7 +45,10 @@ module.exports = (app) => {
       reason: req.body.reason,
       approved: req.body.approved,
 
-    });
+    })
+      .then((results) => {
+        res.json(results);
+      });
   });
 
   // app.put('api/requests/:id', (req,res) => {
