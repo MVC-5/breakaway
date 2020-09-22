@@ -1,8 +1,9 @@
 // Requiring necessary npm packages
 const express = require('express');
+const exphbs = require('express-handlebars');
 
 // Setting up port and requiring models for syncing
-const PORT = process.env.PORT || 8081;
+const PORT = process.env.PORT || 8080;
 const db = require('./models');
 
 // Creating express app and configuring middleware needed for authentication
@@ -11,9 +12,13 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(express.static('public'));
 
-app.get('/', (req, res) => res.send('INDEX'));
+app.engine('handlebars', exphbs({ defaultLayout: 'main' }));
+app.set('view engine', 'handlebars');
 
-app.use('/routes', require('./routes/html-routes'));
+// app.get('/', (req, res) => res.render('index'));
+
+require('./routes/html-routes.js')(app);
+require('./routes/api-routes.js')(app);
 
 // Syncing our database and logging a message to the user upon success
 db.sequelize.sync({ force: true }).then(() => {

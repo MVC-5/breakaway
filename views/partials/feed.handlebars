@@ -1,0 +1,24 @@
+<section class="container post-group">
+
+  {{#each feeds}}
+  <div class="post">
+    <figure>
+      <img class="post-image" src="{{pic_link}}" alt="image" />
+    </figure>
+    <div class="content">
+      <p class="location">{{location}}</p>
+      <p class="description">
+        {{description}}
+      </p>
+      <p class="author">
+        – <span class="name">Emily R. {{id}}</span> /
+        <span class="department">Sales</span>
+      </p>
+      <p class="date">12/2019</p>
+    </div>
+  </div>
+  {{else}}
+  <h2 class="primary">Empty feed</h2>
+  {{/each}}
+
+</section>
