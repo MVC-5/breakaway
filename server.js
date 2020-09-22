@@ -2,7 +2,7 @@
 const express = require('express');
 
 // Setting up port and requiring models for syncing
-const PORT = process.env.PORT || 8080;
+const PORT = process.env.PORT || 8081;
 const db = require('./models');
 
 // Creating express app and configuring middleware needed for authentication
@@ -13,7 +13,7 @@ app.use(express.static('public'));
 
 app.get('/', (req, res) => res.send('INDEX'));
 
-app.use('/routes', require('./routes/routes'));
+app.use('/routes', require('./routes/html-routes'));
 
 // Syncing our database and logging a message to the user upon success
 db.sequelize.sync({ force: true }).then(() => {
