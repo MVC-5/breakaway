@@ -1,10 +1,7 @@
-const breakBtn = $('#make-break');
-const employeeId = $('#employeeId');
-
 $(document).ready(() => {
-  flatpickr('.r-start', {});
-  flatpickr('.r-end', {});
+  // homepage
 
+  const employeeId = $('#employeeId');
   $('a.open-modal').click(function (event) {
     $(this).modal({
       fadeDuration: 250,
@@ -31,12 +28,36 @@ $(document).ready(() => {
     event.preventDefault();
   });
 
+  // request page
+
+  flatpickr('.r-start', {});
+  flatpickr('.r-end', {});
+
+  // request form
+
+  $('.request-form').submit((event) => {
+    console.log('submit');
+    console.log($('.request-form'.serialize()));
+    // $.ajax({
+    //   type: 'GET',
+    //   url: '/api/login',
+    //   data: { id: thisEmployee },
+    //   success(response) {
+    //     window.location.href = `/request/${thisEmployee}`;
+    //   },
+    //   error(response) {
+    //     console.log(response.status, response.statusText);
+    //   },
+    // });
+    event.preventDefault();
+  });
+
   $('.t-status').each(function () {
     console.log($(this).attr('data-status'));
     if ($(this).attr('data-status') === 'pending') {
       $(this).addClass('t-pending');
       $(this).text('Pending');
-    } else if ($(this).attr('data-status') === false) {
+    } else if ($(this).attr('data-status') === 'false') {
       $(this).addClass('t-denied');
       $(this).text('Denied');
     } else {

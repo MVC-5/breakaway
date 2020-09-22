@@ -71,6 +71,10 @@ p {
   margin: 0 0 1em 0;
 }
 
+.text-center {
+  text-align: center;
+}
+
 .primary {
   color:  var(--primary-color);
 }

@@ -29,15 +29,15 @@ module.exports = (sequelize, DataTypes) => {
       foreignKey: 'manager_id',
     });
 
-    // Employee.hasMany(models.request, {
-    //   onUpdate: 'cascade',
-    //   onDelete: 'cascade',
-    // });
+    Employee.hasMany(models.request, {
+      onUpdate: 'cascade',
+      onDelete: 'cascade',
+    });
 
-    // Employee.hasMany(models.feed, {
-    //   onUpdate: 'cascade',
-    //   onDelete: 'cascade',
-    // });
+    Employee.hasMany(models.feed, {
+      onUpdate: 'cascade',
+      onDelete: 'cascade',
+    });
   };
 
   return Employee;

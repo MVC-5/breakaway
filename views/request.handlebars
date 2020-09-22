@@ -1,6 +1,6 @@
 <div class="container">
-      <h3 class="request-header primary">Welcome, <span class="employee">{{name}}</span></h3>
-<p class="request-p">Choose your dates:</p>
+  <h3 class="request-header primary">Welcome, <span class="employee">{{name}}</span></h3>
+  <p class="request-p">Choose your dates:</p>
   <form action="" class="request-form">
     <div class="form-group">
       <input type="text" class="field r-start" placeholder="From" required />
@@ -11,29 +11,28 @@
       <button class="btn request-btn" type="button">Request</button>
     </div>
   </form>
-<p class="request-p">Your upcoming requests: </p>
+  <p class="request-p">Your upcoming requests: </p>
   <section class="view-table">
-    {{#each upcomingRequests}}
+
     <table class="t-request">
+      {{#each upcomingRequests}}
       <tr class="t-row upcoming-1">
         <td class="t-days">From: {{startDate}}</td>
         <td class="t-date">To: {{endDate}}</td>
-        
+
         <td class="t-status" data-status="{{status}}">---------</td>
       </tr>
-      <tr class="t-row upcoming-2">
-        <td class="t-days">Days remaining <span class="days-remaining">4</span></td>
-        <td class="t-date">From <span class="date-end">10.14.2020</span></td>
-        <td class="t-status t-approved"></td>
-      </tr>
-    </table>
-    {{else}}
-    <h2 class="primary">You have no upcoming requests.</h2>
-    {{/each}}
-  </section>
+      {{else}}
+      <h2 class="primary">You have no upcoming requests.</h2>
+      {{/each}}
 
-  <p class="request-p primary">Your remaining days: <span class="bank">10</span></p>
-<hr class="request-hr">
-<p class="request-p">Current vacation schedule: </p>
-{{!-- {{> calendar}} --}}
+    </table>
+
+  </section>
+  {{#if bank}}
+  <p class="request-p primary">Your remaining days: {{bank}}</p>
+  {{/if}}
+  <hr class="request-hr">
+  <p class="request-p">Current vacation schedule: </p>
+  {{!-- {{> calendar}} --}}
 </div>

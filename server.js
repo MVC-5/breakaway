@@ -17,11 +17,12 @@ app.set('view engine', 'handlebars');
 
 // app.get('/', (req, res) => res.render('index'));
 
-require('./routes/html-routes.js')(app);
-require('./routes/api-routes.js')(app);
+require('./controllers/feed_controller')(app);
+// require('./controllers/manager_controller')(app);
+require('./controllers/request_controller')(app);
 
 // Syncing our database and logging a message to the user upon success
-db.sequelize.sync({ force: true }).then(() => {
+db.sequelize.sync({ }).then(() => {
   app.listen(PORT, () => {
     console.log(
       `==> 🌎  Listening on port ${PORT}. Visit http://localhost:${PORT}/ in your browser.`,
