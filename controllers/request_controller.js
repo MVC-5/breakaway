@@ -16,9 +16,7 @@ function getDate() {
 module.exports = function (app) {
   // login before viewing/making requests
   app.get('/api/login', (req, res) => {
-    if (req.query.id === '7') {
-      res.send('succes');
-    } else throw Error;
+    res.redirect(`/request/${req.query.id}`);
   });
 
   app.get('/request/:id', (req, res) => {
@@ -82,4 +80,42 @@ module.exports = function (app) {
         res.status(404).send({ error: 'Something is wrong' });
       });
   });
+  app.get('/api/requests', (req, res) => {
+    db.request.findAll({}).then((results) => {
+      res.json(results);
+      console.log(results);
+    });
+  });
+
+  app.get('/request', (req, res) => {
+    const msg = { msg: 'Please go back and login in to view your requests.' };
+    res.render('404', msg);
+  });
+
+  // app.get('/api/requests/employee', (req, res) => {
+  //   db.request.findAll({
+  //     where: {
+  //       employeeId: 2,
+  //     },
+  //   }).then((results) => {
+  //     res.json(results);
+  //   });
+  // });
+
+  // // Do a JOIN with employees foreign Key is managerID
+  // app.get('/api/requests/manager', (req, res) => {
+  //   db.request.findAll({
+
+  //     include: {
+  //       model: db.employee,
+  //       where: {
+
+  //         manager_id: 2,
+
+  //       },
+  //     },
+  //   }).then((results) => {
+  //     res.json(results);
+  //   });
+  // });
 };

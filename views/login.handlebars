@@ -1,0 +1,12 @@
+{{> nav}}
+{{#if manager}}
+{{!-- show manager login --}}
+<form action="/manager-login" method="get">
+<input type="text" name="managerId">
+<button type="submit">View dashboard</button>
+</form>
+
+{{else}}
+{{!-- show employee login --}}
+
+{{/if}}

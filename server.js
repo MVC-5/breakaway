@@ -18,10 +18,13 @@ app.set('view engine', 'handlebars');
 // app.get('/', (req, res) => res.render('index'));
 
 require('./controllers/feed_controller')(app);
-// require('./controllers/manager_controller')(app);
 require('./controllers/request_controller')(app);
-
 require('./controllers/manager_controller')(app);
+
+app.get('/*', (req, res) => {
+  const msg = { msg: 'Nothing to see here..' };
+  res.render('404', msg);
+});
 
 // Syncing our database and logging a message to the user upon success
 db.sequelize.sync({}).then(() => {
