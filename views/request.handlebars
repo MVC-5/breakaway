@@ -1,34 +1,54 @@
 <div class="container">
-      <h3 class="request-header primary">Welcome, <span class="employee">Name</span></h3>
-<p class="request-p">Choose your dates:</p>
-  <form action="" class="request-form">
-    <div class="form-group">
-      <input type="text" class="field r-start" placeholder="From" required />
-      <input type="text" class="field r-end" placeholder="To" required />
-    </div>
-    <input type="text" class="field r-reason" placeholder="How are you going to breakaway?" />
-    <div class="form-group">
-      <button class="btn request-btn" type="button">Request</button>
-    </div>
-  </form>
-<p class="request-p">Your upcoming requests: </p>
-  <section class="view-table">
-    <table class="t-request">
-      <tr class="t-row upcoming-1">
-        <td class="t-days">Days requested <span class="days-requested">4</span></td>
-        <td class="t-date">From <span class="date-start">10.10.2020</span></td>
-        <td class="t-status t-approved">Approved</td>
-      </tr>
-      <tr class="t-row upcoming-2">
-        <td class="t-days">Days remaining <span class="days-remaining">4</span></td>
-        <td class="t-date">From <span class="date-end">10.14.2020</span></td>
-        <td class="t-status t-approved"></td>
-      </tr>
-    </table>
-  </section>
+  <div class="request-header">
+  <div>
+  {{> nav}}
+  </div>
+    <h3>Hi <span class="employee">Name</span> !</h3>
+  </div>
 
-  <p class="request-p primary">Your remaining days: <span class="bank">10</span></p>
-<hr class="request-hr">
-<p class="request-p">Current vacation schedule: </p>
-{{> calendar}}
+  <p class="request-p secondary">Choose Your Dates:</p>
+    <form action="" class="request-form">
+      <div class="form-group">
+        <input type="text" class="field r-start" placeholder="From" required />
+        <input type="text" class="field r-end" placeholder="To" required />
+      </div>
+      <input type="text" class="field r-reason" placeholder="How are you going to breakaway?" />
+      <div class="form-group">
+        <button class="btn request-btn" type="button">Request</button>
+      </div>
+    </form>
+    
+  <p class="request-p secondary">Your Upcoming Requests: </p>
+    <section class="view-table">
+      <table class="t-request">
+        <tr class="t-row">
+          <td class="t-days">Days: <span class="days-requested">4</span></td>
+          <td class="t-date">From: <span class="date-start">10.10.2020</span></td>
+          <td class="t-date">To: <span class="date-end">10.15.2020</span></td>
+        </tr>
+        <tr class="t-row">
+          <td colspan= "2" class="requested-on">Requested on: <span class="request-date">08.15.2020</span></td>
+          <td class="t-status t-approved">APPROVED</td>
+        </tr>
+      </table>
+      
+      <table class="t-request">
+        <tr class="t-row">
+          <td class="t-days">Days: <span class="days-requested">3</span></td>
+          <td class="t-date">From: <span class="date-start">11.15.2020</span></td>
+          <td class="t-date">To: <span class="date-end">11.17.2020</span></td>
+        </tr>
+        <tr class="t-row">
+          <td colspan= "2" class="requested-on">Requested on: <span class="request-date">09.15.2020</span></td>
+          <td class="t-status t-pending">PENDING</td>
+        </tr>
+      </table>
+    </section>
+
+  <p class="request-p primary">Your Remaining Days: <span class="bank">10</span></p>
+  <hr class="request-hr">
+  <br/>
+  <p class="request-p primary">Current Vacation Schedule: </p>
+  <br/>
+  {{> calendar}}
 </div>

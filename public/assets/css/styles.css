@@ -12,7 +12,7 @@
   --light-primary-color: #fff;
   --accent-color: #F0A500;
   --alert-color: #821752;
-  --p-variant-color: #f2ebf3;
+  --p-variant-color: #DFF0EF;
   --background: #fff;
   --default-text: #787878;
   --text-placeholder: #ABABAB;
@@ -122,6 +122,7 @@ p {
   padding: 0.5em 1em;
   color: var(--light-primary-color);
   background-color: var(--primary-color);
+  box-shadow: 2px 2px 8px 1px #ABABAB;
 }
 
 .btn:active {
@@ -140,7 +141,6 @@ p {
   font-family: "comfortaa";
   line-height: 3.2rem;
   letter-spacing: 0.2em;
-  box-shadow: 2px 2px 8px 1px #ABABAB;
 }
 
 .btn-approve {
@@ -230,9 +230,9 @@ p {
 
 .field {
   width: 44%;
-  font-size: 0.8rem;
+  font-size: 1rem;
   border-radius: var(--button-border-radius);
-  padding: 8px;
+  padding: 12px;
   margin: 0 2px;
   border-color: var(--primary-color);
 }
@@ -247,7 +247,8 @@ p {
 }
 
 .request-btn {
-  /* padding: 15px 20px; */
+  padding: 12px 36px;
+  letter-spacing: 0.2em;
 }
 
 /* request view table styles */
@@ -284,34 +285,47 @@ table tr:last-child td:last-child {
   border-bottom-right-radius: var(--default-border-radius);
 }
 
+table {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
 table, th,
 td {
   font-size: .8rem;
+  font-weight: 400;
   border: 1px solid var(--primary-color);
-  padding: 10px;
+  padding: 12px;
 }
 
 td.t-approved {
   background-color: var(--secondary-color);
+  text-align: center;
+  letter-spacing: 0.1em;
   color: white;
 }
 
 td.t-pending {
   background-color: var(--accent-color);
+  text-align: center;
+  letter-spacing: 0.1em;
   color: white;
 }
 
 td.t-denied {
   background-color: var(--alert-color);
+  text-align: center;
+  letter-spacing: 0.1em;
   color: white;
 }
 
-.upcoming-1 td:last-child {
+/* .upcoming-1 td:last-child {
   border-bottom: 0;
 }
 .upcoming-2 td:last-child {
-  border-top: 0;
-}
+  border-top: 1px solid var(--primary-color);
+} */
 
 /* end default styles */
 
@@ -388,6 +402,14 @@ td.t-denied {
   text-align: left;
   width: 350px;
   margin: 0 auto 10px;
+  font-family: "Comfortaa";
+  font-weight: 500;
+}
+
+.bank {
+  color: var(--secondary-color);
+  font-size: larger;
+  font-weight: 600;
 }
 
 .request-hr {
