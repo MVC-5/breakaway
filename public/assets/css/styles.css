@@ -6,15 +6,19 @@
 
 /* Main site styles */
 :root {
-  --primary-color: #6800a8;
-  --dark-primary-color: #004d40;
+  --primary-color: #0C084C;
+  --dark-primary-color: #09063A;
+  --secondary-color: #00B7A8;
   --light-primary-color: #fff;
+  --accent-color: #F0A500;
+  --alert-color: #821752;
   --p-variant-color: #f2ebf3;
-  --secondary-color: #006064;
   --background: #fff;
-  --default-text: #444;
-  --reject-color: #c50c00;
-  --approve-color: #52c62a;
+  --default-text: #787878;
+  --text-placeholder: #ABABAB;
+
+  /* --reject-color: #c50c00;
+  --approve-color: #52c62a; */
 
   --default-border-radius: 15px;
   --top-border-radius: 10px 10px 0 0;
@@ -23,7 +27,7 @@
 }
 
 h1 {
-  font-family: "quicksand";
+  font-family: "comfortaa";
   font-weight: 600;
   font-size: xx-large;
   color: var(--dark-primary-color);
@@ -36,13 +40,13 @@ h2 {
 }
 
 h3 {
-  font-family: "roboto";
+  font-family: "comfortaa";
   font-weight: 300;
   font-size: 1.5rem;
 }
 
 h4 {
-  font-family: "Quicksand";
+  font-family: "comfortaa";
   font-weight: 500;
   font-size: large;
   line-height: 40px;
@@ -58,7 +62,7 @@ a {
   font-family: "roboto";
   font-weight: 300;
   font-size: 15px;
-  color: var(--light-primary-color);
+  color: var(--default-text);
 }
 
 body {
@@ -75,9 +79,17 @@ p {
   color:  var(--primary-color);
 }
 
+.primary-background {
+  background-color: var(--primary-color);
+}
+
+.secondary {
+  color: var(--secondary-color);
+}
+
 .container {
   min-width: 400px;
-  margin: 50px auto;
+  /* margin: 50px auto; */
 }
 
 /* Button styles */
@@ -119,28 +131,33 @@ p {
 
 .btn:hover {
   filter: brightness(115%);
+  color: var(--light-primary-color);
 }
 
 .btn-large {
-  font-size: 1.25rem;
-  font-weight: 400;
+  font-size: 1.70rem;
+  font-weight: 600;
+  font-family: "comfortaa";
+  line-height: 3.2rem;
+  letter-spacing: 0.2em;
+  box-shadow: 2px 2px 8px 1px #ABABAB;
 }
 
 .btn-approve {
   min-width: 137px;
-  background-color: var(--approve-color);
+  background-color: var(--secondary-color);
 }
 
 .btn-reject {
   min-width: 137px;
-  background-color: var(--reject-color);
+  background-color: var(--alert-color);
 }
 
 /* Post styles */
 .post-group {
   max-width: 1000px;
   min-width: 400px;
-  margin: 50px auto;
+  margin: 10px auto;
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -172,17 +189,25 @@ p {
 }
 
 .location {
+  font-size: 1rem;
   font-weight: 400;
+  color: var(--secondary-color);
 }
 
 .description {
+  font-family: "roboto";
+  font-weight: 300;
+  font-size: 1rem;
+  line-height: 1.25rem;
 }
 
 .author {
-  margin-bottom: 5px;
-}
-
-.department {
+  font-family: "roboto";
+  font-weight: 400;
+  line-height: 1.25rem;
+  margin: 0 10px 10px 0;
+  display: flex;
+  justify-content: flex-end;
 }
 
 /* Form styles */
@@ -200,7 +225,7 @@ p {
 }
 
 .flatpickr-calendar {
-  font-family: "quicksand";
+  font-family: "comfortaa";
 }
 
 .field {
@@ -267,17 +292,17 @@ td {
 }
 
 td.t-approved {
-  background-color: var(--approve-color);
+  background-color: var(--secondary-color);
   color: white;
 }
 
 td.t-pending {
-  background-color: grey;
+  background-color: var(--accent-color);
   color: white;
 }
 
 td.t-denied {
-  background-color: var(--reject-color);
+  background-color: var(--alert-color);
   color: white;
 }
 
@@ -298,9 +323,8 @@ td.t-denied {
   justify-content: center;
   flex-wrap: wrap;
   text-align: center;
-  margin: 30vh auto;
+  margin: 10vh auto;
 }
-
 
 .hero > * {
   margin: 5px .8rem;
@@ -308,12 +332,15 @@ td.t-denied {
   padding-bottom: .5rem;
 }
 
-
 /* nav partial */
 .nav {
   display: flex;
   justify-content: flex-end;
-  margin: 15px 25px;
+  flex-wrap: wrap;
+  margin-bottom: 50px;
+  height: 75px;
+  padding: 35px 25px 0 0;
+  align-items: center;
 }
 
 .nav-item {
@@ -324,14 +351,37 @@ td.t-denied {
 }
 
 .nav-item:hover {
-  filter: brightness(140%);
+  filter: brightness(120%);
 }
 
-/* request page */
+#tagline1, #tagline2 {
+  font-family: "comfortaa";
+  font-weight: 500;
+  font-size: x-large;
+  color: var(--secondary-color);
+  letter-spacing: 0.1em;
+  line-height: 2.1em;
+  max-width: 400px;
+}
+
+#tagline1 {
+  color: var(--light-primary-color);
+}
+
+#color-switch {
+  color: var(--secondary-color);
+}
+
+/* request / employee page */
 
 .request-header {
   text-align: center;
-  margin: 50px auto 4rem;
+  margin: 0 auto 2rem;
+  height: 10rem;
+  border-radius: 0 0 15px 15px;
+  color: var(--light-primary-color);
+  background-color: var(--primary-color);
+  box-shadow: 0px 6px 6px 0px #ABABAB
 }
 
 .request-p {
