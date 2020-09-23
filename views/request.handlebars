@@ -1,0 +1,42 @@
+{{> nav}}
+
+<div class="container">
+  <h3 class="request-header primary" id="employee" data-id="{{id}}">Welcome, {{name}}</h3>
+  <p class="request-p">Choose your dates:</p>
+  <form action="" class="request-form">
+    <div class="form-group">
+      <input name="startDate" type="text" class="field r-start" placeholder="From" required />
+      <input name="endDate" type="text" class="field r-end" placeholder="To" required />
+    </div>
+    <input name="reason" type="text" class="field r-reason" placeholder="How are you going to breakaway?" />
+    <div class="form-group">
+      <button class="btn request-btn" type="submit">Request</button>
+    </div>
+  </form>
+  <p class="request-p">Your upcoming requests: </p>
+  <section class="view-table">
+
+    <table class="t-request">
+      {{#each upcomingRequests}}
+      <tr class="t-row upcoming-1">
+        <td class="t-days">From: {{startDate}}</td>
+        <td class="t-date">To: {{endDate}}</td>
+
+        <td class="t-status" data-status="{{status}}">---------</td>
+      </tr>
+      {{else}}
+      <h2 class="primary">You have no upcoming requests.</h2>
+      {{/each}}
+
+    </table>
+
+  </section>
+  {{#if bank}}
+  <p class="request-p primary">Your remaining days: {{bank}}</p>
+  {{/if}}
+  <hr class="request-hr">
+  <p class="request-p">Current vacation schedule: </p>
+  {{!-- {{> calendar}} --}}
+</div>
+
+  <script src="/assets/js/request.js"></script>

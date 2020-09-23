@@ -1,1 +1,0 @@
-we can probably have multiple controllers. for creating requests, manager portal, main page... i dont know. is that how the controllers are supposed to work?
