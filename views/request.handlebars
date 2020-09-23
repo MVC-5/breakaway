@@ -1,14 +1,14 @@
 <div class="container">
-  <h3 class="request-header primary">Welcome, <span class="employee">{{name}}</span></h3>
+  <h3 class="request-header primary" id="employee" data-id="{{id}}">Welcome, {{name}}</h3>
   <p class="request-p">Choose your dates:</p>
   <form action="" class="request-form">
     <div class="form-group">
-      <input type="text" class="field r-start" placeholder="From" required />
-      <input type="text" class="field r-end" placeholder="To" required />
+      <input name="startDate" type="text" class="field r-start" placeholder="From" required />
+      <input name="endDate" type="text" class="field r-end" placeholder="To" required />
     </div>
-    <input type="text" class="field r-reason" placeholder="How are you going to breakaway?" />
+    <input name="reason" type="text" class="field r-reason" placeholder="How are you going to breakaway?" />
     <div class="form-group">
-      <button class="btn request-btn" type="button">Request</button>
+      <button class="btn request-btn" type="submit">Request</button>
     </div>
   </form>
   <p class="request-p">Your upcoming requests: </p>
@@ -36,3 +36,5 @@
   <p class="request-p">Current vacation schedule: </p>
   {{!-- {{> calendar}} --}}
 </div>
+
+  <script src="/assets/js/request.js"></script>
