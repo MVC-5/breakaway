@@ -16,7 +16,7 @@
       <p>Bank: {{bank}}</p>
       <table class="t-request">
         <tr class="t-row">
-          <td class="t-days">Days: <span class="days-requested">Fer days</span></td>
+          <td class="t-days">Days: <span class="days-requested">{{duration}}</span></td>
           <td class="t-date">From: <span class="date-start">{{start}}</span></td>
           <td class="t-date">To: <span class="date-end">{{end}}</span></td>
         </tr>
@@ -24,14 +24,16 @@
           <td colspan="3">Reason: {{reason}}</td>
         </tr>
         <tr class="t-row">
-          <td colspan="2" class="requested-on">Requested on: <span class="request-date">{{slicedCreatedAt}}</span></td>
+          <td colspan="2" class="requested-on">Requested on: <span class="request-date">{{reqDate}}</span></td>
           <td class="t-status t-{{status}}">{{status}}</td>
         </tr>
       </table>
     </section>
     <section class=" button-group">
-      <a href="#" class="btn btn-approve man-decision-btn" data-id={{reqId}} data-status="1">Approve</a>
-      <a href="#" class="btn btn-deny man-decision-btn" data-id={{reqId}} data-status="0">Deny</a>
+      <a href="#" class="btn btn-approve man-decision-btn" data-id={{reqId}} data-status="1" data-prev-status={{status}}
+        data-bank={{bank}} data-duration={{duration}} data-empId={{empId}}>Approve</a>
+      <a href="#" class="btn btn-deny man-decision-btn" data-id={{reqId}} data-status="0" data-prev-status={{status}}
+        data-bank={{bank}} data-duration={{duration}} data-empId={{empId}}>Deny</a>
     </section>
     <br />
     <hr class="request-hr">

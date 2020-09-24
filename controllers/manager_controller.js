@@ -28,14 +28,16 @@ module.exports = (app) => {
             if (emp.requests[0]) {
               emp.requests.forEach((request) => {
                 const empReq = request.dataValues;
+                const empId = emp.id;
                 const name = `${emp.employee_first} ${emp.employee_last}`;
                 const role = emp.role.dataValues.title;
                 const { bank } = emp;
                 const { start, end } = empReq;
                 const { createdAt } = empReq;
                 const reqId = empReq.id;
+                const { duration } = empReq;
                 const stringCreatedAt = createdAt.toString();
-                const slicedCreatedAt = stringCreatedAt.slice(0, (stringCreatedAt.length - 42));
+                const reqDate = stringCreatedAt.slice(0, (stringCreatedAt.length - 42));
                 let { reason } = empReq;
                 let status = empReq.approved;
                 if (status === null) {
@@ -49,7 +51,7 @@ module.exports = (app) => {
                   reason = 'N/A';
                 }
                 employeeRequests.push({
-                  name, role, start, end, slicedCreatedAt, status, bank, reason, reqId,
+                  empId, name, role, start, end, duration, reqDate, status, bank, reason, reqId,
                 });
               });
             }
@@ -80,5 +82,19 @@ module.exports = (app) => {
       res.json(request);
       // send email based on status of request
     });
+    if (status === 1) {
+      db.employee.update(
+        {
+          bank: req.body.bank,
+        },
+        {
+          where: {
+            id: req.body.empId,
+          },
+        },
+      ).then((employee) => {
+        res.json(employee);
+      });
+    }
   });
 };
