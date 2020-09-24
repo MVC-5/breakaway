@@ -1,6 +1,15 @@
-<section class="container post-group">
 
+<section class="container post-group">
+  <form action="/api/new-post" method="post" enctype="multipart/form-data">
+  <label for="description">Describe this picture</label>
+  <input type="text" name="description" id="description" required>
+  <input type="file" name="image" id="image" accept="image/*" required />
+  <div>
+    <button id="feed-form" class="btn">Submit!</button>
+  </div>
+</form>
   {{#each feeds}}
+
   <div class="post">
     <figure>
       <img class="post-image" src="{{pic_link}}" alt="image" />
@@ -22,3 +31,4 @@
   {{/each}}
 
 </section>
+
