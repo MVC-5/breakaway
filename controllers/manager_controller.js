@@ -36,6 +36,7 @@ module.exports = (app) => {
                 const { bank } = emp;
                 const { start, end } = empReq;
                 const { createdAt } = empReq;
+                const reqId = empReq.id;
                 const stringCreatedAt = createdAt.toString();
                 console.log(stringCreatedAt);
                 const slicedCreatedAt = stringCreatedAt.slice(0, (stringCreatedAt.length - 33));
@@ -59,8 +60,9 @@ module.exports = (app) => {
                 }
                 console.log(status);
                 console.log(reason);
+                console.log(reqId);
                 employeeRequests.push({
-                  name, role, start, end, slicedCreatedAt, status, bank, reason,
+                  name, role, start, end, slicedCreatedAt, status, bank, reason, reqId,
                 });
               });
             }
@@ -98,4 +100,17 @@ module.exports = (app) => {
         console.log(err);
       });
   });
+
+  //   app.put('/api/manager', (req, res) => {
+  //     db.request.update({
+  //       req.body.status,
+  //       {
+  //         where: {
+  //           id: req.body.reqId
+  //         }
+  //       }
+  //     }).then((request) => {
+  //         send email based on status of request
+  //       })
+  // })
 };

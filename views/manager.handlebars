@@ -29,6 +29,9 @@
     </table>
 
   </section>
+
+  <button type="submit" class="approveBtn" data-status="Approved">Approve</button>
+  <button type="submit" class="approveBtn" data-status="Denied">Deny</button>
   {{#if bank}}
   <p class="request-p primary">Your remaining days: {{bank}}</p>
   {{/if}}
@@ -37,4 +40,4 @@
   {{!-- {{> calendar}} --}}
 </div>
 
-<script src="/assets/js/request.js"></script>
+<script src="/assets/js/manager.js"></script>
