@@ -1,4 +1,5 @@
 // controller for making and viewing requests by employee id. also employee verification
+const moment = require('moment');
 const db = require('../models');
 
 function getDate() {
@@ -14,6 +15,14 @@ function getDate() {
 }
 
 module.exports = function (app) {
+  app.get('/employee-access', (req, res) => {
+    res.render('login', { manager: false });
+  });
+
+  app.get('/employee-login', (req, res) => {
+    res.redirect(`/request/${req.query.employeeId}`);
+  });
+
   // login before viewing/making requests
   app.get('/api/login', (req, res) => {
     res.redirect(`/request/${req.query.id}`);
@@ -30,7 +39,7 @@ module.exports = function (app) {
         if (!data.length) {
           const msg = { msg: `Employe id ${employeeId} not found` };
           res.status(404) // HTTP status 404: NotFound
-            .render('404', msg);
+            .render('login', msg);
         } else {
           const fName = data[0].dataValues.employee_first;
           const { bank } = data[0].dataValues;
@@ -40,15 +49,23 @@ module.exports = function (app) {
             const dateCreated = d.createdAt;
             const startDate = d.start;
             const endDate = d.end;
+            const { duration } = d;
+            const { createdAt } = d;
+            const stringCreatedAt = createdAt.toString();
+            const formattedCreatedAt = stringCreatedAt.slice(0, (stringCreatedAt.length - 42));
             let status = d.approved;
             if (status === null) {
               status = 'pending';
+            } else if (status === true) {
+              status = 'approved';
+            } else {
+              status = 'denied';
             }
             if (endDate >= getDate()) {
               // only show dates that are upcoming
               console.log(endDate);
               upcomingRequests.push({
-                dateCreated, startDate, endDate, status,
+                dateCreated, startDate, endDate, duration, formattedCreatedAt, status,
               });
             }
           });
@@ -65,11 +82,18 @@ module.exports = function (app) {
 
   app.post('/api/request', (req, res) => {
     const d = req.body;
+    const startTime = d.formData.startDate;
+    const endTime = d.formData.endDate;
+    const duration = moment
+      .duration(moment(endTime, 'YYYY/MM/DD')
+        .diff(moment(startTime, 'YYYY/MM/DD'))).asDays();
+    console.log(duration);
     db.request.create({
       start: d.formData.startDate,
       end: d.formData.endDate,
       reason: d.formData.reason,
       employeeId: d.id,
+      duration,
     })
       .then((result) => {
         console.log(result);
@@ -91,31 +115,4 @@ module.exports = function (app) {
     const msg = { msg: 'Please go back and login in to view your requests.' };
     res.render('404', msg);
   });
-
-  // app.get('/api/requests/employee', (req, res) => {
-  //   db.request.findAll({
-  //     where: {
-  //       employeeId: 2,
-  //     },
-  //   }).then((results) => {
-  //     res.json(results);
-  //   });
-  // });
-
-  // // Do a JOIN with employees foreign Key is managerID
-  // app.get('/api/requests/manager', (req, res) => {
-  //   db.request.findAll({
-
-  //     include: {
-  //       model: db.employee,
-  //       where: {
-
-  //         manager_id: 2,
-
-  //       },
-  //     },
-  //   }).then((results) => {
-  //     res.json(results);
-  //   });
-  // });
 };
