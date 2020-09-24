@@ -38,7 +38,7 @@ module.exports = function (app) {
         if (!data.length) {
           const msg = { msg: `Employe id ${employeeId} not found` };
           res.status(404) // HTTP status 404: NotFound
-            .render('404', msg);
+            .render('login', msg);
         } else {
           const fName = data[0].dataValues.employee_first;
           const { bank } = data[0].dataValues;

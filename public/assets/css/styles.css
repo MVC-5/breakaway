@@ -390,6 +390,7 @@ td.t-denied {
   margin-bottom: 2.5rem;
 }
 .login-box {
+  margin: 0 auto;
   text-align: center;
   padding: 30px 45px;
   height: 240px;
@@ -412,6 +413,10 @@ td.t-denied {
   font-size: .8rem;
   color: var(--primary-color);
   background-color: var(--p-variant-color);
+}
+
+.no-result {
+  color: var(--reject-color);
 }
 
 /* media queries */
