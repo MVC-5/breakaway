@@ -1,8 +1,8 @@
 $(document).ready(() => {
-  function updateRequest(req, id) {
+  function updateRequest(req) {
     $.ajax({
       method: 'PUT',
-      url: `/api/manager/${id}`,
+      url: '/api/manager/update',
       data: req,
     })
       .then(() => {
@@ -10,19 +10,13 @@ $(document).ready(() => {
       });
   }
 
-  $('.approveBtn').on('click', function (event) {
+  $('.man-decision-btn').on('click', function (event) {
     event.stopPropagation();
     event.preventDefault();
     console.log($(this));
-    const status = $(this).attr('data-status');
-    const id = $(this).attr('data-id');
-    const manId = $(this).attr('data-manId');
-    const request = {
-      id,
-      status,
-    };
-    updateRequest(request, manId);
-
+    const reqStatus = $(this).attr('data-status');
+    const reqId = $(this).attr('data-id');
+    updateRequest({ reqId, reqStatus });
     // $(this).attr('data-status')
   });
 });

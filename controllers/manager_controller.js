@@ -18,15 +18,14 @@ module.exports = (app) => {
     })
       .then((data) => {
         if (!data.length) {
-          const msg = `Either manager id ${req.params.id} not found or no employees are assigned to this manager`;
+          const msg = { msg: `Either manager id ${req.params.id} not found or no employees are assigned to this manager` };
           res.status(404) // HTTP status 404: NotFound
-            .render('login', { msg, manager: true });
+            .render('404', msg);
         } else {
           const employeeRequests = [];
           data.forEach((employee) => {
             const emp = employee.dataValues;
             if (emp.requests[0]) {
-              const manId = emp.manager_id;
               emp.requests.forEach((request) => {
                 const empReq = request.dataValues;
                 const name = `${emp.employee_first} ${emp.employee_last}`;
@@ -49,9 +48,8 @@ module.exports = (app) => {
                 if (reason === null) {
                   reason = 'N/A';
                 }
-                console.log(reqId);
                 employeeRequests.push({
-                  name, role, start, end, slicedCreatedAt, status, bank, reason, reqId, manId,
+                  name, role, start, end, slicedCreatedAt, status, bank, reason, reqId,
                 });
               });
             }
@@ -66,18 +64,21 @@ module.exports = (app) => {
       });
   });
 
-  app.put('/api/manager', (req, res) => {
-    console.log(req.body);
-    // db.request.update({
-
-    //   req.body.status,
-    //     {
-    //     where: {
-    //       id: req.body.id
-    //     }
-    //   }
-    //   }).then((request) => {
-    //     // send email based on status of request
-    //   })
+  app.put('/api/manager/update', (req, res) => {
+    const status = parseInt(req.body.reqStatus, 10);
+    const requestId = parseInt(req.body.reqId, 10);
+    db.request.update(
+      {
+        approved: status,
+      },
+      {
+        where: {
+          id: requestId,
+        },
+      },
+    ).then((request) => {
+      res.json(request);
+      // send email based on status of request
+    });
   });
 };
