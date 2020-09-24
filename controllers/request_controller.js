@@ -99,31 +99,4 @@ module.exports = function (app) {
     const msg = { msg: 'Please go back and login in to view your requests.' };
     res.render('404', msg);
   });
-
-  // app.get('/api/requests/employee', (req, res) => {
-  //   db.request.findAll({
-  //     where: {
-  //       employeeId: 2,
-  //     },
-  //   }).then((results) => {
-  //     res.json(results);
-  //   });
-  // });
-
-  // // Do a JOIN with employees foreign Key is managerID
-  // app.get('/api/requests/manager', (req, res) => {
-  //   db.request.findAll({
-
-  //     include: {
-  //       model: db.employee,
-  //       where: {
-
-  //         manager_id: 2,
-
-  //       },
-  //     },
-  //   }).then((results) => {
-  //     res.json(results);
-  //   });
-  // });
 };
