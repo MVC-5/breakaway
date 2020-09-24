@@ -17,6 +17,10 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: true,
       defaultValue: null,
     },
+    duration: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+    },
   });
 
   Request.associate = (models) => {

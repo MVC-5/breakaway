@@ -48,15 +48,23 @@ module.exports = function (app) {
             const dateCreated = d.createdAt;
             const startDate = d.start;
             const endDate = d.end;
+            const { duration } = d;
+            const { createdAt } = d;
+            const stringCreatedAt = createdAt.toString();
+            const formattedCreatedAt = stringCreatedAt.slice(0, (stringCreatedAt.length - 42));
             let status = d.approved;
             if (status === null) {
               status = 'pending';
+            } else if (status === true) {
+              status = 'approved';
+            } else {
+              status = 'denied';
             }
             if (endDate >= getDate()) {
               // only show dates that are upcoming
               console.log(endDate);
               upcomingRequests.push({
-                dateCreated, startDate, endDate, status,
+                dateCreated, startDate, endDate, duration, formattedCreatedAt, status,
               });
             }
           });
