@@ -35,7 +35,7 @@ $(document).ready(() => {
 // Case code for available/booked days calendar
 var daysAlreadyBooked = [
 	'2020-09-22',
-	'2020-09-23',
+	'2020-09-25',
 	'2020-09-28',
 	'2020-11-15',
 	'2020-10-05',
@@ -68,6 +68,6 @@ function displayDays(startDay, howManyDays){
 		}
 	}
 }
-displayDays(0, 20)
+displayDays(8, 39)
 var availableDays = document.querySelectorAll('.available')
 console.log(availableDays);

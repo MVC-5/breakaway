@@ -97,7 +97,6 @@ p {
 .button-group {
   display: flex;
   margin: 10px auto;
-  height: 100px;
   width: 50%;
   justify-content: center;
   align-items: center;
@@ -146,11 +145,13 @@ p {
 .btn-approve {
   min-width: 137px;
   background-color: var(--secondary-color);
+  letter-spacing: 0.2em;
 }
 
-.btn-reject {
+.btn-deny {
   min-width: 137px;
   background-color: var(--alert-color);
+  letter-spacing: 0.2em;
 }
 
 /* Post styles */
@@ -399,7 +400,7 @@ td.t-denied {
   box-shadow: 0px 6px 6px 0px #ABABAB
 }
 
-.request-p {
+.request-p, .requester {
   text-align: left;
   width: 350px;
   margin: 0 auto 10px;
