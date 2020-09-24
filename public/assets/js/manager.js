@@ -20,17 +20,21 @@ $(document).ready(() => {
     const empId = $(this).attr('data-empId');
     const prevStatus = $(this).attr('data-prev-status');
     const duration = parseInt($(this).attr('data-duration'), 10);
-    if (reqStatus === '1') {
-      if (prevStatus !== 'Approved') {
-        bank -= duration;
+    if (duration > bank) {
+      alert("Request cannot be approved since the employee's PTO bank contains less than the number of requested days.");
+    } else {
+      if (reqStatus === '1') {
+        if (prevStatus !== 'Approved') {
+          bank -= duration;
+        }
+      } else if (reqStatus === '0') {
+        if (prevStatus === 'Approved') {
+          bank += duration;
+        }
       }
-    } else if (reqStatus === '0') {
-      if (prevStatus === 'Approved') {
-        bank += duration;
-      }
+      updateRequest({
+        reqId, reqStatus, bank, empId,
+      });
     }
-    updateRequest({
-      reqId, reqStatus, bank, empId,
-    });
   });
 });
