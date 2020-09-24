@@ -1,21 +1,39 @@
 {{> nav}}
+<section class="container">
+
 {{#if manager}}
 {{!-- show manager login --}}
-<div class="login-box">
+<div class="login">
+<h3 class="primary text-center login-heading">Manager Dashboard Login</h3>
+<div class="login-box ">
   <form action="/manager-login" method="get">
-    <input type="text" name="managerId">
-    <button type="submit">View dashboard</button>
+    <label class="login-label" for="managerId">What is your employee ID? </label>
+    <input type="text" class="field" name="managerId" required>
+    <label class="login-label" for="password">What is your password? </label>
+    <input type="password" class="field" name="managerPassword" placeholder="proceed without password" disabled>
+    <button type="submit" class="btn login-btn">View dashboard</button>
   </form>
 </div>
+</div>
+
 
 
 {{else}}
 {{!-- show employee login --}}
-<div class="login-box">
+<div class="login">
+<h3 class="primary text-center login-heading">Employee Request Login</h3>
+<div class="login-box ">
   <form action="/employee-login" method="get">
-    <input type="text" name="employeeId">
-    <button type="submit">View dashboard</button>
+    <label class="login-label" for="managerId">What is your employee ID? </label>
+    <input type="text" class="field" name="employeeId" required>
+    <label class="login-label" for="password">What is your password? </label>
+    <input type="password" class="field" name="employeePassword" placeholder="proceed without password" disabled>
+    <button type="submit" class="btn login-btn">View dashboard</button>
   </form>
 </div>
+</div>
+
 
 {{/if}}
+
+</section>
