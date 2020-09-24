@@ -14,6 +14,14 @@ function getDate() {
 }
 
 module.exports = function (app) {
+  app.get('/employee-access', (req, res) => {
+    res.render('login', { manager: false });
+  });
+
+  app.get('/employee-login', (req, res) => {
+    res.redirect(`/request/${req.query.employeeId}`);
+  });
+
   // login before viewing/making requests
   app.get('/api/login', (req, res) => {
     res.redirect(`/request/${req.query.id}`);
@@ -30,7 +38,7 @@ module.exports = function (app) {
         if (!data.length) {
           const msg = { msg: `Employe id ${employeeId} not found` };
           res.status(404) // HTTP status 404: NotFound
-            .render('404', msg);
+            .render('login', msg);
         } else {
           const fName = data[0].dataValues.employee_first;
           const { bank } = data[0].dataValues;
@@ -91,31 +99,4 @@ module.exports = function (app) {
     const msg = { msg: 'Please go back and login in to view your requests.' };
     res.render('404', msg);
   });
-
-  // app.get('/api/requests/employee', (req, res) => {
-  //   db.request.findAll({
-  //     where: {
-  //       employeeId: 2,
-  //     },
-  //   }).then((results) => {
-  //     res.json(results);
-  //   });
-  // });
-
-  // // Do a JOIN with employees foreign Key is managerID
-  // app.get('/api/requests/manager', (req, res) => {
-  //   db.request.findAll({
-
-  //     include: {
-  //       model: db.employee,
-  //       where: {
-
-  //         manager_id: 2,
-
-  //       },
-  //     },
-  //   }).then((results) => {
-  //     res.json(results);
-  //   });
-  // });
 };

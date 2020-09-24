@@ -48,7 +48,7 @@ h4 {
   line-height: 40px;
 }
 
-p, td {
+p, td, label {
   font-family: "roboto";
   font-weight: 300;
   font-size: 15px;
@@ -74,6 +74,7 @@ p {
 .text-center {
   text-align: center;
 }
+
 
 .primary {
   color:  var(--primary-color);
@@ -214,6 +215,11 @@ p {
   padding: 8px;
   margin: 0 2px;
   border-color: var(--primary-color);
+}
+
+.field:disabled {
+  background-color: var(--p-variant-color);
+  filter: opacity(.4);
 }
 
 .field:focus {
@@ -369,6 +375,48 @@ td.t-denied {
 }
 .devs {
   background-color: green;
+}
+
+/* LOGIN PAGE */
+.login {
+  margin: 90px 0 5%;
+  position: absolute;
+  top: 25%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.login-heading {
+  margin-bottom: 2.5rem;
+}
+.login-box {
+  margin: 0 auto;
+  text-align: center;
+  padding: 30px 45px;
+  height: 240px;
+  width: 315px;
+  background-color: var(--primary-color);
+  border-radius: var(--default-border-radius);
+}
+
+.login-box .field {
+  width: 100%;
+  margin: 8px auto 20px;
+  display: inline-block;
+}
+
+.login-label {
+  color: var(--p-variant-color);
+}
+
+.login-btn {
+  font-size: .8rem;
+  color: var(--primary-color);
+  background-color: var(--p-variant-color);
+}
+
+.no-result {
+  color: var(--reject-color);
 }
 
 /* media queries */
