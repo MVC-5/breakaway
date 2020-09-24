@@ -1,7 +1,9 @@
 $(document).ready(() => {
   // request page
 
+  // eslint-disable-next-line no-undef
   flatpickr('.r-start', {});
+  // eslint-disable-next-line no-undef
   flatpickr('.r-end', {});
 
   // request form
@@ -10,7 +12,6 @@ $(document).ready(() => {
   console.log(employeeId);
   $('.request-form').submit((event) => {
     event.preventDefault();
-
     console.log('submit');
     const formData = $('.request-form').serializeArray().reduce((obj, item) => {
       obj[item.name] = item.value;
@@ -35,33 +36,4 @@ $(document).ready(() => {
       });
     }
   });
-
-  // show upcoming request status
-  $('.t-status').each(function () {
-    console.log($(this).attr('data-status'));
-    if ($(this).attr('data-status') === 'pending') {
-      $(this).addClass('t-pending');
-      $(this).text('Pending');
-    } else if ($(this).attr('data-status') === 'false') {
-      $(this).addClass('t-denied');
-      $(this).text('Denied');
-    } else {
-      $(this).addClass('t-approved');
-      $(this).text('Approved');
-    }
-  });
 });
-
-function formatDate() {
-  const d = new Date();
-  let month = `${d.getMonth() + 1}`;
-  let day = `${d.getDate()}`;
-  const year = d.getFullYear();
-
-  if (month.length < 2) { month = `0${month}`; }
-  if (day.length < 2) { day = `0${day}`; }
-
-  return [year, month, day].join('-');
-}
-
-console.log(formatDate());
