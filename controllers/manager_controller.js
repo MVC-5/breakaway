@@ -80,21 +80,19 @@ module.exports = (app) => {
       },
     ).then((request) => {
       res.json(request);
-      // send email based on status of request
+      // send email based on status of request, could also do this in front end on button click
     });
-    if (status === 1) {
-      db.employee.update(
-        {
-          bank: req.body.bank,
+    db.employee.update(
+      {
+        bank: req.body.bank,
+      },
+      {
+        where: {
+          id: req.body.empId,
         },
-        {
-          where: {
-            id: req.body.empId,
-          },
-        },
-      ).then((employee) => {
-        res.json(employee);
-      });
-    }
+      },
+    ).then((employee) => {
+      res.json(employee);
+    });
   });
 };
