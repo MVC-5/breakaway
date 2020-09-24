@@ -1,4 +1,5 @@
 // controller for making and viewing requests by employee id. also employee verification
+const moment = require('moment');
 const db = require('../models');
 
 function getDate() {
@@ -81,11 +82,18 @@ module.exports = function (app) {
 
   app.post('/api/request', (req, res) => {
     const d = req.body;
+    const startTime = d.formData.startDate;
+    const endTime = d.formData.endDate;
+    const duration = moment
+      .duration(moment(endTime, 'YYYY/MM/DD')
+        .diff(moment(startTime, 'YYYY/MM/DD'))).asDays();
+    console.log(duration);
     db.request.create({
       start: d.formData.startDate,
       end: d.formData.endDate,
       reason: d.formData.reason,
       employeeId: d.id,
+      duration,
     })
       .then((result) => {
         console.log(result);

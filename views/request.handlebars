@@ -14,10 +14,11 @@
     </div>
   </form>
   <p class="request-p">Your upcoming requests: </p>
-  <section class="view-table">
+  {{#each upcomingRequests}}
 
+  <section class="view-table">
     <table class="t-request">
-      {{#each upcomingRequests}}
+
       <tr class="t-row upcoming-1">
         <td>Days: {{duration}}</td>
         <td class="t-days">From: {{startDate}}</td>
@@ -27,23 +28,25 @@
 
       <tr class="t-row upcoming-2">
         <td colspan="2">Requested date: {{formattedCreatedAt}}</td>
-        <td class="t-status t-{{status}}" >{{status}}</td>
+        <td class="t-status t-{{status}}">{{status}}</td>
 
       </tr>
 
-      {{else}}
-      <h2 class="primary">You have no upcoming requests.</h2>
-      {{/each}}
+
 
     </table>
 
   </section>
+  {{else}}
+  <h2 class="primary text-center">You have no upcoming requests.</h2>
+  {{/each}}
+
   {{#if bank}}
   <p class="request-p primary">Your remaining days: {{bank}}</p>
   {{/if}}
   <hr class="request-hr">
   <p class="request-p">Current vacation schedule: </p>
-  {{!-- {{> calendar}} --}}
+  {{> calendar}}
 </div>
 
-  <script src="/assets/js/request.js"></script>
+<script src="/assets/js/request.js"></script>
