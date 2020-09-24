@@ -91,8 +91,7 @@ module.exports = (app) => {
           // }
 
           // // res.json(upcomingRequests);
-          // res.render('manager', { requests: employeeRequests });
-          res.send('success!');
+          res.render('manager', { requests: employeeRequests });
         }
       })
       .catch((err) => {
