@@ -14,6 +14,14 @@ function getDate() {
 }
 
 module.exports = function (app) {
+  app.get('/employee-access', (req, res) => {
+    res.render('login', { manager: false });
+  });
+
+  app.get('/employee-login', (req, res) => {
+    res.redirect(`/request/${req.query.employeeId}`);
+  });
+
   // login before viewing/making requests
   app.get('/api/login', (req, res) => {
     res.redirect(`/request/${req.query.id}`);

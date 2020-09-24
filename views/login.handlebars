@@ -1,12 +1,21 @@
 {{> nav}}
 {{#if manager}}
 {{!-- show manager login --}}
-<form action="/manager-login" method="get">
-<input type="text" name="managerId">
-<button type="submit">View dashboard</button>
-</form>
+<div class="login-box">
+  <form action="/manager-login" method="get">
+    <input type="text" name="managerId">
+    <button type="submit">View dashboard</button>
+  </form>
+</div>
+
 
 {{else}}
 {{!-- show employee login --}}
+<div class="login-box">
+  <form action="/employee-login" method="get">
+    <input type="text" name="employeeId">
+    <button type="submit">View dashboard</button>
+  </form>
+</div>
 
 {{/if}}
