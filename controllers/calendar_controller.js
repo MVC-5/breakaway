@@ -1,4 +1,8 @@
+const Moment = require('moment');
+const MomentRange = require('moment-range');
 const db = require('../models');
+
+const moment = MomentRange.extendMoment(Moment);
 
 class Approved {
   constructor(start, end) {
@@ -26,7 +30,15 @@ module.exports = function (app) {
         const newRange = new Approved(startDate, endDate);
         arr.push(newRange);
       }
-      res.json(arr);
+      const nextArr = [];
+      for (let i = 0; i < arr.length; i++) {
+        const startDate = new Date(arr[i].start);
+        const endDate = new Date(arr[i].end);
+        const range = moment.range(startDate, endDate);
+        nextArr.push(Array.from(range.by('days')).map((m) => m.format('YYYY-MM-DD')));
+      }
+      console.log(arr);
+      res.json(nextArr);
     });
   });
 };
