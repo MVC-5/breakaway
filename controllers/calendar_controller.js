@@ -14,24 +14,24 @@ class Approved {
 const arr = [];
 
 module.exports = function (app) {
-  app.get('/api/approvedrequests', (req, res) => {
+  app.get('/api/approvedrequests/:id', (req, res) => {
     db.request.findAll({
       where: {
         approved: true,
       },
       include: [{
         model: db.employee,
-        where: { manager_id: 2 },
+        where: { manager_id: req.params.id },
       }],
     }).then((results) => {
-      for (let i = 0; i < results.length; i++) {
+      for (let i = 0; i < results.length; i += 1) {
         const startDate = results[i].start;
         const endDate = results[i].end;
         const newRange = new Approved(startDate, endDate);
         arr.push(newRange);
       }
       const nextArr = [];
-      for (let i = 0; i < arr.length; i++) {
+      for (let i = 0; i < arr.length; i += 1) {
         const startDate = new Date(arr[i].start);
         const endDate = new Date(arr[i].end);
         const range = moment.range(startDate, endDate);
