@@ -252,6 +252,7 @@ p {
 }
 
 /* request view table styles */
+
 .view-table {
   margin: 0 auto 25px;
   width: 350px;
@@ -419,15 +420,26 @@ td.t-denied {
 
 /* calendar partial */
 .calendar {
-  width: 350px;
-  margin: 0 auto;
+  width: 360px;
+  margin: auto;
 }
 
 .month {
   font-weight: 500;
+  font-family: "comfortaa";
+  font-size: medium;
 }
 
-.calendar li {
+.days{
+  display: inline-flex;
+  flex-wrap: wrap;
+  margin: 5px;
+  border-radius: 10px;
+  padding: 5px;
+  color: white;
+}
+
+/* .calendar li {
   text-align: center;
   padding: 10px;
 }
@@ -437,7 +449,7 @@ td.t-denied {
 }
 .devs {
   background-color: green;
-}
+} */
 
 /* media queries */
 @media only screen 
