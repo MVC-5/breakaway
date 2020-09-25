@@ -37,7 +37,7 @@ VALUES
     ('Drew', 'Schofield', 'dschofield@me.com', 55, '2016-01-21 6:53:51', '2015-01-21 6:53:52', 5, 1);
 
 INSERT INTO requests
-    (start, end, reason, approved, createdAt, updatedAt, employeeId, days)
+    (start, end, reason, approved, createdAt, updatedAt, employeeId, duration)
 VALUES
     ('2021-02-21', '2021-02-24', 'Not breaking away makes Danny a dull boy', 1, '2021-01-21 10:53:49', '2021-01-21 10:53:50', 1, 12),
     ('2021-02-26', '2021-02-27', null, null, '2021-02-21 10:53:51', '2021-02-21 10:53:52', 2, 2),

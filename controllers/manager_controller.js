@@ -15,6 +15,9 @@ module.exports = (app) => {
     db.employee.findAll({
       where: { manager_id: req.params.id },
       include: [{ model: db.request }, { model: db.role }],
+      order: [
+        [db.request, 'start', 'ASC'],
+      ],
     })
       .then((data) => {
         if (!data.length) {
@@ -22,80 +25,81 @@ module.exports = (app) => {
           res.status(404) // HTTP status 404: NotFound
             .render('login', { msg, manager: true });
         } else {
-          console.log(data);
           const employeeRequests = [];
           data.forEach((employee) => {
             const emp = employee.dataValues;
-            console.log(emp.requests);
-
             if (emp.requests[0]) {
               emp.requests.forEach((request) => {
                 const empReq = request.dataValues;
+                const empId = emp.id;
                 const name = `${emp.employee_first} ${emp.employee_last}`;
                 const role = emp.role.dataValues.title;
                 const { bank } = emp;
                 const { start, end } = empReq;
                 const { createdAt } = empReq;
+                const reqId = empReq.id;
+                const { duration } = empReq;
                 const stringCreatedAt = createdAt.toString();
-                console.log(stringCreatedAt);
-                const slicedCreatedAt = stringCreatedAt.slice(0, (stringCreatedAt.length - 33));
+                const reqDate = stringCreatedAt.slice(0, (stringCreatedAt.length - 42));
                 let { reason } = empReq;
+                // original status
+                let oS = empReq.approved;
                 let status = empReq.approved;
-                console.log(name);
-                console.log(role);
-                console.log(bank);
-                console.log(empReq);
-                console.log(start, end);
-                console.log(slicedCreatedAt);
                 if (status === null) {
                   status = 'Pending';
                 } else if (!status) {
                   status = 'Denied';
+                  oS = 'Denied';
                 } else if (status) {
                   status = 'Approved';
+                  oS = 'Approved';
                 }
                 if (reason === null) {
                   reason = 'N/A';
                 }
-                console.log(status);
-                console.log(reason);
                 employeeRequests.push({
-                  name, role, start, end, slicedCreatedAt, status, bank, reason,
+                  empId, name, role, start, end, duration, reqDate, status, oS, bank, reason, reqId,
                 });
               });
             }
           });
-          // const d = data.employee.dataValues;
-
-          // const employeeFirst = d.employee_first;
-          // const { start } = d;
-          // const { end } = d;
-          // const requested = d.createdAt;
-          // let { reason } = d;
-          // let status = d.approved;
-          // if (reason === null) {
-          //   reason = 'N/A';
-          // }
-          // if (status === null) {
-          //   status = 'Pending';
-          // } else if (status === 0) {
-          //   status = 'Denied';
-          // } else if (status === 1) {
-          //   status = 'Approved';
-          // }
-          // employeeRequests.push({
-          //   employee, start, end, requested, reason, status,
-          // });
-
-          //   console.log(employeeRequests);
-          // }
 
           // // res.json(upcomingRequests);
-          res.render('manager', { requests: employeeRequests });
+          res.render('manager', { employeeRequests });
         }
       })
       .catch((err) => {
         console.log(err);
       });
+  });
+
+  app.put('/api/manager/update', (req, res) => {
+    const status = parseInt(req.body.reqStatus, 10);
+    const requestId = parseInt(req.body.reqId, 10);
+    db.request.update(
+      {
+        approved: status,
+      },
+      {
+        where: {
+          id: requestId,
+        },
+      },
+    ).then((request) => {
+      res.json(request);
+      // send email based on status of request, could also do this in front end on button click
+    });
+    db.employee.update(
+      {
+        bank: req.body.bank,
+      },
+      {
+        where: {
+          id: req.body.empId,
+        },
+      },
+    ).then((employee) => {
+      res.json(employee);
+    });
   });
 };
