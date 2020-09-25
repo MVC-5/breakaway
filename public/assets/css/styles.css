@@ -45,7 +45,7 @@ h3 {
 h4 {
   font-family: "comfortaa";
   font-weight: 500;
-  font-size: large;
+  font-size: 1.2rem;
   line-height: 40px;
 }
 
@@ -373,7 +373,7 @@ td.t-denied {
 #tagline1, #tagline2 {
   font-family: "comfortaa";
   font-weight: 500;
-  font-size: x-large;
+  font-size: 1.6rem;
   color: var(--secondary-color);
   letter-spacing: 0.1em;
   line-height: 2.1em;
@@ -381,7 +381,9 @@ td.t-denied {
 }
 
 #tagline1 {
-  color: var(--light-primary-color);
+  color: var(--secondary-color);
+  padding-right: 3rem;
+  padding-left: 3rem;
 }
 
 #color-switch {
@@ -410,7 +412,7 @@ td.t-denied {
 
 .bank {
   color: var(--secondary-color);
-  font-size: larger;
+  font-size: 1.2rem;
   font-weight: 600;
 }
 
@@ -428,7 +430,7 @@ td.t-denied {
 .month {
   font-weight: 500;
   font-family: "comfortaa";
-  font-size: medium;
+  font-size: 1rem;
 }
 
 .wider-view {
