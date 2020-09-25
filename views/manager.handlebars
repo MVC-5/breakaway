@@ -9,7 +9,7 @@
   <p class="request-p secondary">Your Team's Pending Requests: </p>
   <br />
   {{#each employeeRequests}}
-  {{#unless oS}}
+  {{#unless ogStat}}
   <div>
     <p class="requester">{{name}} | {{role}}
     <p>
@@ -32,9 +32,11 @@
     </section>
     <section class=" button-group">
       <a href="#" class="btn btn-approve man-decision-btn" data-id={{reqId}} data-status="1" data-prev-status={{status}}
-        data-bank={{bank}} data-duration={{duration}} data-empId={{empId}}>Approve</a>
+        data-bank={{bank}} data-start={{start}} data-end={{end}} data-duration={{duration}} data-empId={{empId}}
+        data-email={{email}}>Approve</a>
       <a href="#" class="btn btn-deny man-decision-btn" data-id={{reqId}} data-status="0" data-prev-status={{status}}
-        data-bank={{bank}} data-duration={{duration}} data-empId={{empId}}>Deny</a>
+        data-bank={{bank}} data-start={{start}} data-end={{end}} data-duration={{duration}} data-empId={{empId}}
+        data-email={{email}}>Deny</a>
     </section>
     <br />
     <hr class="request-hr">
@@ -48,12 +50,12 @@
   <br />
   <p class="request-p secondary">Your Team's Approved and Denied Requests: </p>
   {{#each employeeRequests}}
-  {{#if oS}}
+  {{#if ogStat}}
   <div>
     <p class="requester">{{name}} | {{role}}
     <p>
     <section class="view-table">
-      <p>Bank: {{bank}}</p>
+      <p>PTO Days Remaining: {{bank}}</p>
       <table class="t-request">
         <tr class="t-row">
           <td class="t-days">Days: <span class="days-requested">{{duration}}</span></td>
@@ -68,12 +70,16 @@
           <td class="t-status t-{{status}}">{{status}}</td>
         </tr>
       </table>
+      <br />
+      <p>Update Request:</p>
     </section>
     <section class=" button-group">
       <a href="#" class="btn btn-approve man-decision-btn" data-id={{reqId}} data-status="1" data-prev-status={{status}}
-        data-bank={{bank}} data-duration={{duration}} data-empId={{empId}}>Approve</a>
+        data-bank={{bank}} data-start={{start}} data-end={{end}} data-duration={{duration}} data-empId={{empId}}
+        data-email={{email}}>Approve</a>
       <a href="#" class="btn btn-deny man-decision-btn" data-id={{reqId}} data-status="0" data-prev-status={{status}}
-        data-bank={{bank}} data-duration={{duration}} data-empId={{empId}}>Deny</a>
+        data-bank={{bank}} data-start={{start}} data-end={{end}} data-duration={{duration}} data-empId={{empId}}
+        data-email={{email}}>Deny</a>
     </section>
     <br />
     <hr class="request-hr">
