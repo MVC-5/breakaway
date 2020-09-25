@@ -188,6 +188,7 @@ p {
 .content {
   margin-left: 10px;
   margin-top: 10px;
+  width: 100%;
 }
 
 .location {
@@ -209,7 +210,7 @@ p {
   line-height: 1.25rem;
   margin: 0 10px 10px 0;
   display: flex;
-  justify-content: flex-end;
+  justify-content: flex-start;
 }
 
 /* Form styles */

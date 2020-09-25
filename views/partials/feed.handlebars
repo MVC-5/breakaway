@@ -1,13 +1,24 @@
 
 <section class="container post-group">
-  {{!-- <form action="/api/new-post" method="post" enctype="multipart/form-data">
+
+
+<div id="new-post" class="modal">
+
+  <form action="/api/new-post" method="post" enctype="multipart/form-data">
+    <label for="employeeId">What's your employee id?</label>
+    <input type="number" class="field" name="employeeId" required>
+    <label for="location">Where did you go?</label>
+    <input type="text" class="field" name="location">
     <label for="description">Describe this picture</label>
-    <input type="text" name="description" id="description" required>
+    <textarea type="text" name="description" id="description" maxlength="200" required></textarea>
     <input type="file" name="image" id="image" accept="image/*" required />
     <div>
       <button id="feed-form" class="btn">Submit!</button>
     </div>
-  </form> --}}
+  </form>
+  <a href="#" rel="modal:close">Close</a>
+</div>
+
   {{#each feeds}}
 
   <div class="post">
@@ -21,9 +32,9 @@
       </p>
 
       <p class="author">
-        <span class="name">Emily R. {{id}}</span> &nbsp/&nbsp
-        <span class="department">Sales</span> &nbsp/&nbsp
-        <span class="date">12/2019</span>
+        <span class="name">{{employeeName}}</span> &nbsp/&nbsp
+        {{!-- <span class="department">Sales</span> &nbsp/&nbsp --}}
+        <span class="date">{{formatDate}}</span>
       </p>
       
     </div>
