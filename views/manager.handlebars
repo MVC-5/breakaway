@@ -6,9 +6,10 @@
     <h3>Manager Dashboard</h3>
   </div>
 
-  <p class="request-p secondary">Your Team's Requests: </p>
+  <p class="request-p secondary">Your Team's Pending Requests: </p>
   <br />
   {{#each employeeRequests}}
+  {{#unless oS}}
   <div>
     <p class="requester">{{name}} | {{role}}
     <p>
@@ -39,8 +40,46 @@
     <hr class="request-hr">
     <br />
   </div>
-  {{else}}
-  <h2 class="primary">You have no upcoming requests.</h2>
+  {{/unless}}
+  {{/each}}
+  <br />
+  <p>Calendar here</p>
+  {{> calendar}}
+  <br />
+  <p class="request-p secondary">Your Team's Approved and Denied Requests: </p>
+  {{#each employeeRequests}}
+  {{#if oS}}
+  <div>
+    <p class="requester">{{name}} | {{role}}
+    <p>
+    <section class="view-table">
+      <p>Bank: {{bank}}</p>
+      <table class="t-request">
+        <tr class="t-row">
+          <td class="t-days">Days: <span class="days-requested">{{duration}}</span></td>
+          <td class="t-date">From: <span class="date-start">{{start}}</span></td>
+          <td class="t-date">To: <span class="date-end">{{end}}</span></td>
+        </tr>
+        <tr class="t-row">
+          <td colspan="3">Reason: {{reason}}</td>
+        </tr>
+        <tr class="t-row">
+          <td colspan="2" class="requested-on">Requested on: <span class="request-date">{{reqDate}}</span></td>
+          <td class="t-status t-{{status}}">{{status}}</td>
+        </tr>
+      </table>
+    </section>
+    <section class=" button-group">
+      <a href="#" class="btn btn-approve man-decision-btn" data-id={{reqId}} data-status="1" data-prev-status={{status}}
+        data-bank={{bank}} data-duration={{duration}} data-empId={{empId}}>Approve</a>
+      <a href="#" class="btn btn-deny man-decision-btn" data-id={{reqId}} data-status="0" data-prev-status={{status}}
+        data-bank={{bank}} data-duration={{duration}} data-empId={{empId}}>Deny</a>
+    </section>
+    <br />
+    <hr class="request-hr">
+    <br />
+  </div>
+  {{/if}}
   {{/each}}
 </div>
 

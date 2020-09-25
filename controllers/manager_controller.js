@@ -15,6 +15,9 @@ module.exports = (app) => {
     db.employee.findAll({
       where: { manager_id: req.params.id },
       include: [{ model: db.request }, { model: db.role }],
+      order: [
+        [db.request, 'start', 'ASC'],
+      ],
     })
       .then((data) => {
         if (!data.length) {
@@ -39,19 +42,23 @@ module.exports = (app) => {
                 const stringCreatedAt = createdAt.toString();
                 const reqDate = stringCreatedAt.slice(0, (stringCreatedAt.length - 42));
                 let { reason } = empReq;
+                // original status
+                let oS = empReq.approved;
                 let status = empReq.approved;
                 if (status === null) {
                   status = 'Pending';
                 } else if (!status) {
                   status = 'Denied';
+                  oS = 'Denied';
                 } else if (status) {
                   status = 'Approved';
+                  oS = 'Approved';
                 }
                 if (reason === null) {
                   reason = 'N/A';
                 }
                 employeeRequests.push({
-                  empId, name, role, start, end, duration, reqDate, status, bank, reason, reqId,
+                  empId, name, role, start, end, duration, reqDate, status, oS, bank, reason, reqId,
                 });
               });
             }
