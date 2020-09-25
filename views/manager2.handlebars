@@ -1,0 +1,67 @@
+<div class="container">
+  <div class="request-header">
+    {{> nav}}
+    <h3 class="manager" id="employee" data-id="{{id}}">Welcome, {{name}}</h3>
+  </div>
+
+  <p class="request-p secondary">Your Team's Requests:</p>
+  <br/>
+
+  {{!-- <form action="" class="request-form">
+    <div class="form-group">
+      <input name="startDate" type="text" class="field r-start" placeholder="From" required />
+      <input name="endDate" type="text" class="field r-end" placeholder="To" required />
+    </div>
+    <input name="reason" type="text" class="field r-reason" placeholder="How are you going to breakaway?" />
+    <div class="form-group">
+      <button class="btn request-btn" type="submit">Request</button>
+    </div>
+  </form> --}}
+
+  <p class="requester primary">Emily R.</p>
+  <section class="view-table">
+
+    <table class="t-request">
+      {{#each upcomingRequests}}
+
+      <tr class="t-row upcoming-1">
+        
+        <td class="t-days">From: {{startDate}}</td>
+        <td class="t-date">To: {{endDate}}</td>
+
+        <td class="t-status" data-status="{{status}}">---------</td>
+      </tr>
+      {{else}}
+      <h2 class="primary">THIS IS TESTING MANAGER.HANDLEBARS</h2>
+      {{/each}}
+
+    </table>
+
+    <div class="button-group">
+      <a href="#" class="btn btn-approve">Approve</a>
+      <a href="#" class="btn btn-deny">Deny</a>
+    </div>
+
+  </section>
+
+
+
+  {{#if bank}}
+  <p class="request-p primary">Your remaining days: {{bank}}</p>
+  {{/if}}
+
+  <br/>
+  <hr class="request-hr">
+  <br/>
+  <p class="request-p primary">Current vacation schedule: </p>
+  {{> calendar}}
+
+  <br/>
+    <hr class="request-hr">
+  <br/>
+  {{!-- Approved / denied requests section --}}
+  <p class="request-p primary">Past Requests: </p>
+
+</div>
+
+<script src="/assets/js/request.js"></script>
