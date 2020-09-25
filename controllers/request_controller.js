@@ -1,7 +1,7 @@
 // controller for making and viewing requests by employee id. also employee verification
-const nodemailer = require('nodemailer');
 const moment = require('moment');
 const db = require('../models');
+const sendEmail = require('../email');
 
 function getDate() {
   const d = new Date();
@@ -22,43 +22,6 @@ const verifyDates = (startDate, endDate) => {
 };
 
 module.exports = function (app) {
-  function sendManagerEmail(email) {
-    // Creating output string
-    const output = `
-        <p>Hello!</p>
-        <p>You are receiving this email because one of your employees submitted a new Breakaway request.
-        <p>To view the request, please visit the <a href="https://breakaway-vacay.herokuapp.com/">Breakaway</a> portal.</p>
-        <p>Thank you for using Breakaway!</p>
-        `;
-
-    // async..await is not allowed in global scope, must use a wrapper
-    async function mainEmail() {
-      // create reusable transporter object using the default SMTP transport
-      const transporter = nodemailer.createTransport({
-        service: 'gmail',
-        auth: {
-          user: 'dev.breakaway@gmail.com', // gmail user - implement npm dotenv + .env file
-          pass: process.env.EMAIL_PASS, // gmail password - implement npm dotenv + .env file
-        },
-      });
-
-      // send mail with defined transport object
-      const info = await transporter.sendMail({
-        from: 'dev.breakaway@gmail.com', // sender address
-        to: email, // list of receivers
-        cc: 'dev.breakaway@gmail.com',
-        subject: 'New Breakaway Request', // Subject line
-        text: 'This is a breakaway test', // plain text body
-        html: output, // html body
-      });
-
-      // DO NOT REMOVE THE LINE BELOW
-      console.log('Email sent: %s', info.messageId);
-      // DO NOT REMOVE THE LINE ABOVE
-    }
-    mainEmail().catch(console.error);
-  }
-
   app.get('/employee-access', (req, res) => {
     res.render('login', { manager: false });
   });
@@ -92,12 +55,13 @@ module.exports = function (app) {
           data[0].dataValues.requests.forEach((request) => {
             const d = request.dataValues;
             const dateCreated = d.createdAt;
-            const startDate = d.start;
-            const endDate = d.end;
+            let startDate = d.start;
+            let endDate = d.end;
+            startDate = moment(startDate).format('MM/DD/YYYY');
+            endDate = moment(endDate).format('MM/DD/YYYY');
             const { duration } = d;
             const { createdAt } = d;
-            const stringCreatedAt = createdAt.toString();
-            const formattedCreatedAt = stringCreatedAt.slice(0, (stringCreatedAt.length - 42));
+            const reqDate = moment(createdAt).format('MM/DD/YYYY');
             let status = d.approved;
             if (status === null) {
               status = 'pending';
@@ -106,11 +70,11 @@ module.exports = function (app) {
             } else {
               status = 'denied';
             }
-            if (endDate >= getDate()) {
+            if (endDate >= moment(getDate()).format('MM/DD/YYYY')) {
               // only show dates that are upcoming
               console.log(endDate);
               upcomingRequests.push({
-                dateCreated, startDate, endDate, duration, formattedCreatedAt, status,
+                dateCreated, startDate, endDate, duration, reqDate, status,
               });
             }
           });
@@ -154,8 +118,15 @@ module.exports = function (app) {
           id: req.body.manager_id,
         },
       }).then((data) => {
-        const manEmail = data[0].dataValues.email;
-        sendManagerEmail(manEmail);
+        const { email } = data[0].dataValues;
+        const output = `
+          <p>Hello!</p>
+          <p>You are receiving this email because one of your employees submitted a new Breakaway request.
+          <p>To view the request, please visit the <a href="https://breakaway-vacay.herokuapp.com/">Breakaway</a> portal.</p>
+          <p>Thank you for using Breakaway!</p>
+        `;
+        const subj = 'New Breakaway Request';
+        sendEmail(subj, email, output);
       });
     } else {
       res.status(404).send({ error: 'Bad dates!' });
