@@ -49,9 +49,9 @@ VALUES
 INSERT INTO feeds
     (description, pic_link, location, createdAt, updatedAt, employeeId)
 VALUES
-    ('Vacation1', 'https://dummyimage.com/200x200/000/fff&text=Test+me', 'Seattle', '2021-02-21 10:53:49', '2021-02-21 10:53:50', 1),
-    ('Vacation2', 'https://dummyimage.com/200x200/000/fff&text=Test+me', 'Portland', '2021-02-21 10:53:51', '2021-02-21 10:53:52', 2),
-    ('Vacation3', 'https://dummyimage.com/200x200/000/fff&text=Test+me', 'Montenegro', '2021-02-21 10:53:53', '2021-02-21 10:53:54', 3),
-    ('Vacation4', 'https://dummyimage.com/200x200/000/fff&text=Test+me', 'Iceland', '2021-02-21 10:53:55', '2021-02-21 10:53:56', 4),
-    ('Vacation5', 'https://dummyimage.com/200x200/000/fff&text=Test+me', 'New Zealand', '2021-02-21 10:53:57', '2021-02-21 10:53:58', 5),
-    ('Vacation6', 'https://dummyimage.com/200x200/000/fff&text=Test+me', 'The Moon', '2021-02-21 10:53:59', '2021-02-21 10:54:00', 6);
+    ('Went to Emerald City!  Beautiful views all around', 'https://res.cloudinary.com/breakbreakaway/image/upload/v1601015236/zykokormmibumwylxcvf.jpg', 'Seattle', '2021-02-21 10:53:49', '2021-02-21 10:53:50', 1),
+    ('The food scene in Portland is amazing!', 'https://res.cloudinary.com/breakbreakaway/image/upload/v1601015337/kinsucvgcjufeprkqzap.jpg', 'Portland', '2021-02-21 10:53:51', '2021-02-21 10:53:52', 2),
+    ('If you have not been to Montenegro, you need to check it out!', 'https://res.cloudinary.com/breakbreakaway/image/upload/v1601015491/jnbjhw2rogsqwafxwjcm.jpg', 'Montenegro', '2021-02-21 10:53:53', '2021-02-21 10:53:54', 3),
+    ('My vacation to Iceland!  Saw the Northern Lights.', 'https://res.cloudinary.com/breakbreakaway/image/upload/v1601015020/vxsfbhu01xdmuakyqcdd.jpg', 'Iceland', '2021-02-21 10:53:55', '2021-02-21 10:53:56', 4),
+    ('Skied some epic backcountry pow lines in New Zealand!', 'https://res.cloudinary.com/breakbreakaway/image/upload/v1601015601/kfkw24fmg9dr6kalvj49.jpg', 'New Zealand', '2021-02-21 10:53:57', '2021-02-21 10:53:58', 5),
+    ('Went to the moon! Because why not?', 'https://res.cloudinary.com/breakbreakaway/image/upload/v1601015746/ufh6bdfh7begno04igla.jpg', 'The Moon', '2021-02-21 10:53:59', '2021-02-21 10:54:00', 6);
