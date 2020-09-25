@@ -32,16 +32,13 @@ module.exports = function (app) {
         `;
 
     // async..await is not allowed in global scope, must use a wrapper
-    async function main() {
+    async function mainEmail() {
       // create reusable transporter object using the default SMTP transport
       const transporter = nodemailer.createTransport({
-        // host: "smtp.ethereal.email",
-        // port: 587,
-        // secure: false, // true for 465, false for other ports
         service: 'gmail',
         auth: {
           user: 'dev.breakaway@gmail.com', // gmail user - implement npm dotenv + .env file
-          pass: 'mvc-5-breakaway', // gmail password - implement npm dotenv + .env file
+          pass: process.env.EMAIL_PASS, // gmail password - implement npm dotenv + .env file
         },
       });
 
@@ -55,12 +52,11 @@ module.exports = function (app) {
         html: output, // html body
       });
 
+      // DO NOT REMOVE THE LINE BELOW
       console.log('Email sent: %s', info.messageId);
-      // Message sent: <b658f8ca-6296-ccf4-8306-87d57a0b4321@example.com>
-
-      // res.render('partials/contact', { msg: 'Email has been sent!' });
+      // DO NOT REMOVE THE LINE ABOVE
     }
-    main().catch(console.error);
+    mainEmail().catch(console.error);
   }
 
   app.get('/employee-access', (req, res) => {
