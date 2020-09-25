@@ -19,6 +19,7 @@ $(document).ready(() => {
   $('.request-form').submit((event) => {
     event.preventDefault();
     console.log('submit');
+    const manId = $('.request-btn').attr('data-manId');
     const formData = $('.request-form').serializeArray().reduce((obj, item) => {
       obj[item.name] = item.value;
       return obj;
@@ -35,6 +36,7 @@ $(document).ready(() => {
         data: {
           id: employeeId,
           formData,
+          manager_id: manId,
         },
         success() {
           window.location.reload();
