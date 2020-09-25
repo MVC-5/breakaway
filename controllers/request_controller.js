@@ -14,6 +14,12 @@ function getDate() {
   return [year, month, day].join('-');
 }
 
+const verifyDates = (startDate, endDate) => {
+  if (moment(startDate).isBefore(endDate, 'day') && moment().isBefore(startDate, 'day')) {
+    return true;
+  } return false;
+};
+
 module.exports = function (app) {
   app.get('/employee-access', (req, res) => {
     res.render('login', { manager: false });
@@ -88,21 +94,25 @@ module.exports = function (app) {
       .duration(moment(endTime, 'YYYY/MM/DD')
         .diff(moment(startTime, 'YYYY/MM/DD'))).asDays();
     console.log(duration);
-    db.request.create({
-      start: d.formData.startDate,
-      end: d.formData.endDate,
-      reason: d.formData.reason,
-      employeeId: d.id,
-      duration,
-    })
-      .then((result) => {
-        console.log(result);
-        res.redirect('back');
+    if (verifyDates(startTime, endTime)) {
+      db.request.create({
+        start: d.formData.startDate,
+        end: d.formData.endDate,
+        reason: d.formData.reason,
+        employeeId: d.id,
+        duration,
       })
-      .catch((error) => {
-        console.log(error);
-        res.status(404).send({ error: 'Something is wrong' });
-      });
+        .then((result) => {
+          console.log(result);
+          res.redirect('back');
+        })
+        .catch((error) => {
+          console.log(error);
+          res.status(404).send({ error: 'Something is wrong' });
+        });
+    } else {
+      res.status(404).send({ error: 'Bad dates!' });
+    }
   });
   app.get('/api/requests', (req, res) => {
     db.request.findAll({}).then((results) => {
