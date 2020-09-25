@@ -1,13 +1,13 @@
 
 <section class="container post-group">
-  <form action="/api/new-post" method="post" enctype="multipart/form-data">
-  <label for="description">Describe this picture</label>
-  <input type="text" name="description" id="description" required>
-  <input type="file" name="image" id="image" accept="image/*" required />
-  <div>
-    <button id="feed-form" class="btn">Submit!</button>
-  </div>
-</form>
+  {{!-- <form action="/api/new-post" method="post" enctype="multipart/form-data">
+    <label for="description">Describe this picture</label>
+    <input type="text" name="description" id="description" required>
+    <input type="file" name="image" id="image" accept="image/*" required />
+    <div>
+      <button id="feed-form" class="btn">Submit!</button>
+    </div>
+  </form> --}}
   {{#each feeds}}
 
   <div class="post">
@@ -19,11 +19,13 @@
       <p class="description">
         {{description}}
       </p>
+
       <p class="author">
-        – <span class="name">Emily R. {{id}}</span> /
-        <span class="department">Sales</span>
+        <span class="name">Emily R. {{id}}</span> &nbsp/&nbsp
+        <span class="department">Sales</span> &nbsp/&nbsp
+        <span class="date">12/2019</span>
       </p>
-      <p class="date">12/2019</p>
+      
     </div>
   </div>
   {{else}}
@@ -31,4 +33,3 @@
   {{/each}}
 
 </section>
-

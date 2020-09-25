@@ -1,8 +1,10 @@
-{{> nav}}
-
 <div class="container">
-  <h3 class="request-header primary" id="employee" data-id="{{id}}">Welcome, {{name}}</h3>
-  <p class="request-p">Choose your dates:</p>
+  <div class="request-header">
+    {{> nav}}
+    <h3 class="employee" id="employee" data-id="{{id}}">Hi {{name}} !</h3>
+  </div>
+
+  <p class="request-p secondary">Choose Your Dates:</p>
   <form action="" class="request-form">
     <div class="form-group">
       <input name="startDate" type="text" class="field r-start" placeholder="From" required />
@@ -13,7 +15,11 @@
       <button class="btn request-btn" type="submit">Request</button>
     </div>
   </form>
-  <p class="request-p">Your upcoming requests: </p>
+
+  <p class="request-p secondary">Your Upcoming Requests: </p>
+
+  <div class= "wider-view">
+
   {{#each upcomingRequests}}
 
   <section class="view-table">
@@ -32,20 +38,25 @@
 
       </tr>
 
-
-
     </table>
 
   </section>
+
   {{else}}
-  <h2 class="primary text-center">You have no upcoming requests.</h2>
+  <h2 class="primary text-center">You Have No Upcoming Requests.</h2>
   {{/each}}
 
+  </div>
+
   {{#if bank}}
-  <p class="request-p primary">Your remaining days: {{bank}}</p>
+  <p class="request-p primary">Your Remaining Days: {{bank}}</p>
   {{/if}}
+
+  <br/>
   <hr class="request-hr">
-  <p class="request-p">Current vacation schedule: </p>
+  <br/>
+
+  <p class="request-p primary">Current Vacation Schedule: </p>
   {{> calendar}}
 </div>
 
