@@ -23,7 +23,7 @@ module.exports = (app) => {
         if (!data.length) {
           const msg = { msg: `Either manager id ${req.params.id} not found or no employees are assigned to this manager` };
           res.status(404) // HTTP status 404: NotFound
-            .render('404', msg);
+            .render('login', { msg, manager: true });
         } else {
           const employeeRequests = [];
           data.forEach((employee) => {
