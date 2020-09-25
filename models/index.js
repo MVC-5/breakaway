@@ -5,7 +5,7 @@ const Sequelize = require('sequelize');
 const basename = path.basename(__filename);
 const env = process.env.NODE_ENV || 'development';
 // I think the line below is also causing the error on line 23. Found an article, but unsure if this relates to us https://stackoverflow.com/questions/62917111/sequelize-import-is-not-a-function.
-const config = require(`${__dirname}/../config/config.json`)[env];
+const config = require(`${__dirname}/../config/config.js`)[env];
 const db = {};
 
 let sequelize;
