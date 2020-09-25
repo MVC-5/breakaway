@@ -37,8 +37,17 @@ module.exports = function (app) {
         const range = moment.range(startDate, endDate);
         nextArr.push(Array.from(range.by('days')).map((m) => m.format('YYYY-MM-DD')));
       }
-      console.log(arr);
-      res.json(nextArr);
+
+      const flatArray = nextArr.flat();
+
+      const uniqueDates = [];
+      flatArray.forEach((c) => {
+        if (!uniqueDates.includes(c)) {
+          uniqueDates.push(c);
+        }
+      });
+      console.log(uniqueDates);
+      res.json(uniqueDates);
     });
   });
 };
