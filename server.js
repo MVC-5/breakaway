@@ -2,6 +2,8 @@
 const express = require('express');
 const exphbs = require('express-handlebars');
 
+const dotenv = require('dotenv');
+dotenv.config();
 // Setting up port and requiring models for syncing
 const PORT = process.env.PORT || 8080;
 const db = require('./models');

@@ -22,8 +22,8 @@ const upload = multer({ storage, fileFilter: imageFilter });
 
 cloudinary.config({
   cloud_name: 'breakbreakaway',
-  api_key: '496689558829542',
-  api_secret: 'hidden for secrecy',
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
 });
 // main page feed routes and queries. including display queries and make new post
 const db = require('../models');

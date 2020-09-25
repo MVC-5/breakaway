@@ -22,6 +22,7 @@
   "homepage": "https://github.com/MVC-5/breakaway#readme",
   "dependencies": {
     "cloudinary": "^1.23.0",
+    "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "express-handlebars": "^5.1.0",
     "moment": "^2.29.0",
