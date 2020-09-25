@@ -46,6 +46,7 @@ module.exports = function (app) {
           uniqueDates.push(c);
         }
       });
+      
       uniqueDates.shift();
       uniqueDates.pop();
       console.log(uniqueDates);

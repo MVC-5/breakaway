@@ -1,10 +1,10 @@
-// this loop creates a day
+// This loop creates a day
 function displayDays(startDay, howManyDays, approvedDays){
 	for (let i = startDay; i < howManyDays; i++) {
 		let day = moment()
 		console.log(day.add(i, 'days').format('YYYY-MM-DD'));
 		dayBooked = false
-		//check the newly created against all days booked already
+		//Check the newly created against all days booked already
 		for (let j = 0; j < approvedDays.length; j++) {
 			if (day.format('YYYY-MM-DD') == approvedDays[j]){
 				dayBooked = true
@@ -25,7 +25,7 @@ function displayDays(startDay, howManyDays, approvedDays){
 		}
 	}
 }
-// displayDays(0, 15)
+
 var availableDays = document.querySelectorAll('.available')
 console.log(availableDays);
 
