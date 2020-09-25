@@ -1,4 +1,5 @@
 // controller for making and viewing requests by employee id. also employee verification
+const nodemailer = require('nodemailer');
 const moment = require('moment');
 const db = require('../models');
 
@@ -15,6 +16,47 @@ function getDate() {
 }
 
 module.exports = function (app) {
+  function sendManagerEmail(email) {
+    // Creating output string
+    const output = `
+        <p>Hello!</p>
+        <p>You are receiving this email because one of your employees submitted a new Breakaway request.
+        <p>To view the request, please visit the <a href="https://breakaway-vacay.herokuapp.com/">Breakaway</a> portal.</p>
+        <p>Thank you for using Breakaway!</p>
+        `;
+
+    // async..await is not allowed in global scope, must use a wrapper
+    async function main() {
+      // create reusable transporter object using the default SMTP transport
+      const transporter = nodemailer.createTransport({
+        // host: "smtp.ethereal.email",
+        // port: 587,
+        // secure: false, // true for 465, false for other ports
+        service: 'gmail',
+        auth: {
+          user: 'dev.breakaway@gmail.com', // gmail user - implement npm dotenv + .env file
+          pass: 'mvc-5-breakaway', // gmail password - implement npm dotenv + .env file
+        },
+      });
+
+      // send mail with defined transport object
+      const info = await transporter.sendMail({
+        from: 'dev.breakaway@gmail.com', // sender address
+        to: email, // list of receivers
+        cc: 'dev.breakaway@gmail.com',
+        subject: 'New Breakaway Request', // Subject line
+        text: 'This is a breakaway test', // plain text body
+        html: output, // html body
+      });
+
+      console.log('Email sent: %s', info.messageId);
+      // Message sent: <b658f8ca-6296-ccf4-8306-87d57a0b4321@example.com>
+
+      // res.render('partials/contact', { msg: 'Email has been sent!' });
+    }
+    main().catch(console.error);
+  }
+
   app.get('/employee-access', (req, res) => {
     res.render('login', { manager: false });
   });
@@ -43,6 +85,7 @@ module.exports = function (app) {
         } else {
           const fName = data[0].dataValues.employee_first;
           const { bank } = data[0].dataValues;
+          const manId = data[0].dataValues.manager_id;
           const upcomingRequests = [];
           data[0].dataValues.requests.forEach((request) => {
             const d = request.dataValues;
@@ -71,7 +114,7 @@ module.exports = function (app) {
           });
           // res.json(upcomingRequests);
           res.render('request', {
-            name: fName, upcomingRequests, bank, id: employeeId,
+            name: fName, upcomingRequests, bank, id: employeeId, manId,
           });
         }
       })
@@ -103,6 +146,14 @@ module.exports = function (app) {
         console.log(error);
         res.status(404).send({ error: 'Something is wrong' });
       });
+    db.employee.findAll({
+      where: {
+        id: req.body.manager_id,
+      },
+    }).then((data) => {
+      const manEmail = data[0].dataValues.email;
+      sendManagerEmail(manEmail);
+    });
   });
   app.get('/api/requests', (req, res) => {
     db.request.findAll({}).then((results) => {

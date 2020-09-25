@@ -1,7 +1,54 @@
 // routes for the manager page and queries for data
+const nodemailer = require('nodemailer');
 const db = require('../models');
 
 module.exports = (app) => {
+  function sendEmployeeEmail(req) {
+    let decision = req.body.reqStatus;
+    if (decision === '0') {
+      decision = 'denied';
+    } else if (decision === '1') {
+      decision = 'approved';
+    }
+    // Creating output string
+    const output = `
+        <p>Hello!</p>
+        <p>You are receiving this email because your manager has made an update to your recent Breakaway request.
+        <p>Your request for dates ${req.body.start} through ${req.body.end} has been ${decision} by your manager. To view your recent request, please visit the <a href="https://breakaway-vacay.herokuapp.com/">Breakaway</a> portal.</p>
+        <p>Thank you for using Breakaway!</p>
+        `;
+
+    // async..await is not allowed in global scope, must use a wrapper
+    async function main() {
+      // create reusable transporter object using the default SMTP transport
+      const transporter = nodemailer.createTransport({
+        // host: "smtp.ethereal.email",
+        // port: 587,
+        // secure: false, // true for 465, false for other ports
+        service: 'gmail',
+        auth: {
+          user: 'dev.breakaway@gmail.com', // gmail user - implement npm dotenv + .env file
+          pass: 'mvc-5-breakaway', // gmail password - implement npm dotenv + .env file
+        },
+      });
+
+      // send mail with defined transport object
+      const info = await transporter.sendMail({
+        from: 'dev.breakaway@gmail.com', // sender address
+        to: req.body.email, // list of receivers
+        cc: 'dev.breakaway@gmail.com',
+        subject: 'Breakaway Request Update', // Subject line
+        text: 'This is a breakaway test', // plain text body
+        html: output, // html body
+      });
+
+      console.log('Email sent: %s', info.messageId);
+      // Message sent: <b658f8ca-6296-ccf4-8306-87d57a0b4321@example.com>
+
+      // res.render('partials/contact', { msg: 'Email has been sent!' });
+    }
+    main().catch(console.error);
+  }
   // login before viewing/making requests
   app.get('/manager-access', (req, res) => {
     res.render('login', { manager: true });
@@ -33,6 +80,7 @@ module.exports = (app) => {
                 const empReq = request.dataValues;
                 const empId = emp.id;
                 const name = `${emp.employee_first} ${emp.employee_last}`;
+                const { email } = emp;
                 const role = emp.role.dataValues.title;
                 const { bank } = emp;
                 const { start, end } = empReq;
@@ -43,22 +91,23 @@ module.exports = (app) => {
                 const reqDate = stringCreatedAt.slice(0, (stringCreatedAt.length - 42));
                 let { reason } = empReq;
                 // original status
-                let oS = empReq.approved;
+                let ogStat = empReq.approved;
                 let status = empReq.approved;
                 if (status === null) {
-                  status = 'Pending';
+                  status = 'pending';
                 } else if (!status) {
-                  status = 'Denied';
-                  oS = 'Denied';
+                  status = 'denied';
+                  ogStat = 'denied';
                 } else if (status) {
-                  status = 'Approved';
-                  oS = 'Approved';
+                  status = 'approved';
+                  ogStat = 'approved';
                 }
                 if (reason === null) {
                   reason = 'N/A';
                 }
                 employeeRequests.push({
-                  empId, name, role, start, end, duration, reqDate, status, oS, bank, reason, reqId,
+                  // eslint-disable-next-line max-len
+                  empId, name, role, start, end, duration, reqDate, status, ogStat, bank, reason, reqId, email,
                 });
               });
             }
@@ -76,6 +125,7 @@ module.exports = (app) => {
   app.put('/api/manager/update', (req, res) => {
     const status = parseInt(req.body.reqStatus, 10);
     const requestId = parseInt(req.body.reqId, 10);
+    sendEmployeeEmail(req);
     db.request.update(
       {
         approved: status,
@@ -87,7 +137,6 @@ module.exports = (app) => {
       },
     ).then((request) => {
       res.json(request);
-      // send email based on status of request, could also do this in front end on button click
     });
     db.employee.update(
       {
@@ -98,8 +147,8 @@ module.exports = (app) => {
           id: req.body.empId,
         },
       },
-    ).then((employee) => {
-      res.json(employee);
+    ).then(() => {
+      console.log('Bank updated!');
     });
   });
 };
