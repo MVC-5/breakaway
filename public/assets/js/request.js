@@ -25,7 +25,6 @@ $(document).ready(() => {
     }, {});
     if (!formData.startDate || !formData.endDate) {
       $('#response').text('Did you forget to enter in a date?');
-      // alert('Did you forget to enter in a date?');
     } else if (!verifyDates(formData.startDate, formData.endDate)) {
       $('#response').text('Please enter valid dates that start after today.');
     } else {
