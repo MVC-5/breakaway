@@ -3,7 +3,6 @@ const express = require('express');
 const exphbs = require('express-handlebars');
 
 const dotenv = require('dotenv');
-
 dotenv.config();
 // Setting up port and requiring models for syncing
 const PORT = process.env.PORT || 8080;
@@ -24,7 +23,6 @@ require('./controllers/feed_controller')(app);
 require('./controllers/request_controller')(app);
 require('./controllers/manager_controller')(app);
 require('./controllers/calendar_controller')(app);
-require('./.controllers/employee)controller')(app);
 
 app.get('/*', (req, res) => {
   const msg = { msg: 'Nothing to see here..' };
