@@ -12,11 +12,9 @@ module.exports = function (app) {
       manager_id: data.manager_id,
     })
       .then((result) => {
-        console.log(result);
         res.json(result);
       })
       .catch((error) => {
-        console.log(error);
         res.status(404).send({ error: 'Something is wrong' });
       });
   });
@@ -31,10 +29,8 @@ module.exports = function (app) {
       },
 
     }).then((result) => {
-      console.log(result);
       res.json(result);
     }).catch((error) => {
-      console.log(error);
       res.status(404).send({ error: 'Something is wrong' });
     });
   });
