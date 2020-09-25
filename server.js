@@ -21,6 +21,7 @@ require('./controllers/feed_controller')(app);
 require('./controllers/request_controller')(app);
 require('./controllers/manager_controller')(app);
 require('./controllers/calendar_controller')(app);
+require('./controllers/employee_controller')(app);
 
 app.get('/*', (req, res) => {
   const msg = { msg: 'Nothing to see here..' };
