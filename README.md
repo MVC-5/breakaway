@@ -1,5 +1,7 @@
 ![License Badge](https://img.shields.io/badge/License-MIT-0298c3)
 
+![brand](demo/breakaway-0.png)
+
 # Breakaway
 
   ## Project Description
