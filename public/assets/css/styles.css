@@ -238,6 +238,8 @@ p {
   padding: 12px;
   margin: 0 2px;
   border-color: var(--primary-color);
+  font-family: "roboto";
+  font-weight: 300;
 }
 
 .field:disabled {
@@ -340,7 +342,7 @@ td.t-denied {
   justify-content: center;
   flex-wrap: wrap;
   text-align: center;
-  margin: 10vh auto;
+  margin: 20vh auto;
 }
 
 .hero > * {
@@ -497,6 +499,36 @@ td.t-denied {
 .no-result {
   color: var(--alert-color);
 }
+
+.modal {
+  text-align: center;
+  padding: 25px 45px;
+  height: 400px;
+  width: 350px;
+  background-color: var(--primary-color);
+  border-radius: var(--default-border-radius);
+}
+
+.modal .field {
+  width: 100%;
+  margin: 8px auto 15px;
+  display: inline-block;
+}
+
+.modal-btn {
+  font-size: 0.8rem;
+  color: var(--light-primary-color);
+  background-color: var(--secondary-color);
+  box-shadow: none;
+}
+
+.choose-file {
+  width: 100%;
+  margin: 8px auto 15px;
+  display: inline-block;
+  color: var(--light-primary-color);
+}
+
 
 /* media queries */
 @media only screen 
