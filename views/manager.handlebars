@@ -5,12 +5,11 @@
     </div>
     <h3>Manager Dashboard</h3>
   </div>
-
-  <p class="request-p secondary">Your Team's Pending Requests: </p>
+  <p class="request-p secondary aHead">Your Team's Pending Requests: </p>
   <br />
   {{#each employeeRequests}}
   {{#unless ogStat}}
-  <div>
+  <div class="aRequest">
     <p class="requester">{{name}} | {{role}}
     <p>
     <section class="view-table">
@@ -45,13 +44,12 @@
   {{/unless}}
   {{/each}}
   <br />
-  <p>Calendar here</p>
   {{> calendar}}
   <br />
-  <p class="request-p secondary">Your Team's Approved and Denied Requests: </p>
+  <p class="request-p secondary bHead">Your Team's Approved and Denied Requests: </p>
   {{#each employeeRequests}}
   {{#if ogStat}}
-  <div>
+  <div class="bRequest">
     <p class="requester">{{name}} | {{role}}
     <p>
     <section class="view-table">
