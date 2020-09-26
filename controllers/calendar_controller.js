@@ -30,7 +30,6 @@ function getDates(results) {
     const range = moment.range(startDate, endDate);
     nextArr.push(Array.from(range.by('days', { excludeEnd: false })).map((m) => m.format('ddd-YYYY-MM-DD')));
   }
-  console.log(nextArr);
 
   const flatArray = nextArr.flat();
   let uniqueDates = [];
@@ -39,12 +38,9 @@ function getDates(results) {
       uniqueDates.push(c);
     }
   });
-  console.log(uniqueDates);
   const limit = moment().add(1, 'month').format('ddd-YYYY-MM-DD');
-  console.log(limit);
 
   uniqueDates = uniqueDates.filter((date) => moment(date, 'ddd-YYYY-MM-DD') < moment(limit, 'ddd-YYYY-MM-DD'));
-  console.log(uniqueDates);
   const calendar = [];
 
   const diff = Math.abs(moment().diff(limit, 'days'));
