@@ -60,7 +60,8 @@ function getDates(results) {
   return calendar;
 }
 
-module.exports = function (app) {
+module.exports = (app) => {
+  // hit from manager page using manager id
   app.get('/api/approvedrequests/:id', (req, res) => {
     db.request.findAll({
       where: {
@@ -76,6 +77,7 @@ module.exports = function (app) {
     });
   });
 
+  // hit from employee profile/request page
   app.get('/api/approvedrequests/emp/:id', (req, res) => {
     db.employee.findAll({
       where: {
@@ -85,12 +87,37 @@ module.exports = function (app) {
     })
       .then((result) => {
         const empMan = result[0].dataValues.manager_id;
-        const dateArr = getDates(empMan);
-        res.json(dateArr);
+        // if employee doesnt have manager (self manage)
+        if (empMan === null) {
+          db.request.findAll({
+            where: {
+              approved: true,
+            },
+            include: [{
+              model: db.employee,
+              where: { manager_id: req.params.id },
+            }],
+          }).then((results) => {
+            const dateArr = getDates(results);
+            res.json(dateArr);
+          });
+        }
+        // if employee has manager
+        db.request.findAll({
+          where: {
+            approved: true,
+          },
+          include: [{
+            model: db.employee,
+            where: { manager_id: empMan },
+          }],
+        }).then((results) => {
+          const dateArr = getDates(results);
+          res.json(dateArr);
+        });
       })
-      .catch(() => {
-        const dateArr = getDates(req.params.id);
-        res.json(dateArr);
+      .catch((err) => {
+        console.log(err);
       });
   });
 };

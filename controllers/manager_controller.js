@@ -8,11 +8,12 @@ module.exports = (app) => {
   app.get('/manager-access', (req, res) => {
     res.render('login', { manager: true });
   });
-
+  // route for form fallback if js doesnst load
   app.get('/manager-login', (req, res) => {
     res.redirect(`/manager/${req.query.managerId}`);
   });
 
+  // manager dashboard access
   app.get('/manager/:id', (req, res) => {
     db.employee.findAll({
       where: { manager_id: req.params.id },
@@ -22,6 +23,7 @@ module.exports = (app) => {
       ],
     })
       .then((data) => {
+        // if no manager found, sends to login screen again
         if (!data.length) {
           const msg = `Either manager id ${req.params.id} not found or no employees are assigned to this manager`;
           res.status(404) // HTTP status 404: NotFound
@@ -77,6 +79,7 @@ module.exports = (app) => {
       });
   });
 
+  // when manager updates a requests status
   app.put('/api/manager/update', (req, res) => {
     const status = parseInt(req.body.reqStatus, 10);
     const requestId = parseInt(req.body.reqId, 10);
@@ -86,7 +89,7 @@ module.exports = (app) => {
     } else if (decision === '1') {
       decision = 'approved';
     }
-    // Creating output string
+    // Creating output string for email to employee
     const output = `
         <p>Hello!</p>
         <p>You are receiving this email because your manager has made an update to your recent Breakaway request.
@@ -108,6 +111,7 @@ module.exports = (app) => {
     ).then((request) => {
       res.json(request);
     });
+    // update request in db
     db.employee.update(
       {
         bank: req.body.bank,

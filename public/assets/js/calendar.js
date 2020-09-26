@@ -1,3 +1,5 @@
+/* eslint-disable no-undef */
+// ^^ allows moment to be undefined ^^
 function makeCalendar(daysApproved) {
   const calTable = $('.cal-table');
   // creates calendar rows
@@ -47,7 +49,6 @@ $(document).ready(() => {
         data: req,
       })
         .then((days) => {
-          console.log(days);
           makeCalendar(days);
         });
     } else {

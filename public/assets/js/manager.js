@@ -23,7 +23,8 @@ $(document).ready(() => {
     const start = $(this).attr('data-start');
     const end = $(this).attr('data-end');
     const email = $(this).attr('data-email');
-    if (duration > bank) {
+    // if employee doesnt have enough days in bank request cannot be approved
+    if (duration > bank && reqStatus === '1') {
       alert("Request cannot be approved since the employee's PTO bank contains less than the number of requested days.");
     } else {
       if (reqStatus === '1') {

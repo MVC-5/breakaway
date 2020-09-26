@@ -3,6 +3,7 @@ const moment = require('moment');
 const db = require('../models');
 const sendEmail = require('../email');
 
+// used to make sure only requests that are upcoming are shown
 function getDate() {
   const d = new Date();
   let month = `${d.getMonth() + 1}`;
@@ -15,28 +16,34 @@ function getDate() {
   return [year, month, day].join('-');
 }
 
+// verify dates are sequential and start after current day
 const verifyDates = (startDate, endDate) => {
   if (moment(startDate).isBefore(endDate, 'day') && moment().isBefore(startDate, 'day')) {
     return true;
   } return false;
 };
 
-module.exports = function (app) {
+module.exports = (app) => {
+  // employee login screen
   app.get('/employee-access', (req, res) => {
     res.render('login', { manager: false });
   });
-
+  // fallback for form request if js doesnt load
   app.get('/employee-login', (req, res) => {
     res.redirect(`/request/${req.query.employeeId}`);
   });
 
   // login before viewing/making requests
+  // login form passes query ?id={id} to this endpoint
   app.get('/api/login', (req, res) => {
     res.redirect(`/request/${req.query.id}`);
   });
 
+  // login redirects to individual employee page
   app.get('/request/:id', (req, res) => {
     const employeeId = req.params.id;
+    // find all where joining on request
+    // outputs requests for employee id
     db.employee.findAll({
       where: { id: employeeId },
       include: [{ model: db.request }],
@@ -44,6 +51,7 @@ module.exports = function (app) {
     })
       .then((data) => {
         if (!data.length) {
+          // if no employee with that id
           const msg = { msg: `Employe id ${employeeId} not found` };
           res.status(404) // HTTP status 404: NotFound
             .render('login', msg);
@@ -63,6 +71,7 @@ module.exports = function (app) {
             const { createdAt } = d;
             const reqDate = moment(createdAt).format('MM/DD/YYYY');
             let status = d.approved;
+            // status determines class styling and text label
             if (status === null) {
               status = 'pending';
             } else if (status === true) {
@@ -78,7 +87,6 @@ module.exports = function (app) {
               });
             }
           });
-          // res.json(upcomingRequests);
           res.render('request', {
             name: fName, upcomingRequests, bank, id: employeeId, manId,
           });
@@ -89,6 +97,7 @@ module.exports = function (app) {
       });
   });
 
+  // creating a new request
   app.post('/api/request', (req, res) => {
     const d = req.body;
     const startTime = d.formData.startDate;
@@ -118,6 +127,7 @@ module.exports = function (app) {
           id: req.body.manager_id,
         },
       }).then((data) => {
+        // send email to that employee's manager
         const { email } = data[0].dataValues;
         const output = `
           <p>Hello!</p>
@@ -132,13 +142,15 @@ module.exports = function (app) {
       res.status(404).send({ error: 'Bad dates!' });
     }
   });
+
+  // util to view requests
   app.get('/api/requests', (req, res) => {
     db.request.findAll({}).then((results) => {
       res.json(results);
-      console.log(results);
     });
   });
 
+  // if access is attempted before login
   app.get('/request', (req, res) => {
     const msg = { msg: 'Please go back and login in to view your requests.' };
     res.render('404', msg);

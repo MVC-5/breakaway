@@ -505,6 +505,10 @@ td.t-denied {
 }
 
 /* calendar border fix */
+.cal-table {
+  margin: 15px auto 0;
+}
+
 td.cal-day {
   border-radius: 0;
 }

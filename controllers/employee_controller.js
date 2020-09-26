@@ -1,8 +1,7 @@
 const db = require('../models');
 
-// Module exports for employee controller
-
-module.exports = function (app) {
+// util for employee management
+module.exports = (app) => {
   app.post('/api/employee', (req, res) => {
     const data = req.body;
     db.employee.create({
@@ -16,7 +15,7 @@ module.exports = function (app) {
       .then((result) => {
         res.json(result);
       })
-      .catch((error) => {
+      .catch(() => {
         res.status(404).send({ error: 'Something is wrong' });
       });
   });
@@ -32,7 +31,7 @@ module.exports = function (app) {
 
     }).then((result) => {
       res.json(result);
-    }).catch((error) => {
+    }).catch(() => {
       res.status(404).send({ error: 'Something is wrong' });
     });
   });
