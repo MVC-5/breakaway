@@ -447,6 +447,9 @@ td.t-denied {
   padding: 40px;
 }
 
+.manager-table {
+  margin: 15px;
+}
 /* current vacations calendar */
 .days{
   display: inline-flex;

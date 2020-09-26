@@ -7,10 +7,13 @@
   </div>
 
   <p class="request-p secondary">Your Team's Pending Requests: </p>
-  <br />
+  <br/>
+
+  <div class= "wider-view">
+
   {{#each employeeRequests}}
   {{#unless ogStat}}
-  <div>
+  <div class= "manager-table">
     <p class="requester">{{name}} | {{role}}
     <p>
     <section class="view-table">
@@ -44,14 +47,18 @@
   </div>
   {{/unless}}
   {{/each}}
+  </div>
+
   <br />
-  <p>Calendar here</p>
-  {{> calendar}}
   <br />
   <p class="request-p secondary">Your Team's Approved and Denied Requests: </p>
+  <br />
+
+  <div class= "wider-view">
+
   {{#each employeeRequests}}
   {{#if ogStat}}
-  <div>
+  <div class= "manager-table">
     <p class="requester">{{name}} | {{role}}
     <p>
     <section class="view-table">
@@ -87,6 +94,11 @@
   </div>
   {{/if}}
   {{/each}}
+  </div>
+
+  <p class="request-p primary">Next 4 Weeks Schedule: </p>
+  <br/>
+  {{> calendar}}
 </div>
 
 <script src="/assets/js/manager.js"></script>
