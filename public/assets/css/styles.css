@@ -529,6 +529,22 @@ td.t-denied {
   color: var(--light-primary-color);
 }
 
+.share {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  text-align: center;
+  margin: auto;
+}
+
+.share-link {
+  font-family: "comfortaa";
+  font-weight: 700;
+  font-size: 1.2rem;
+  line-height: 40px;
+  color: var(--primary-color);
+  letter-spacing: 0.1em;
+}
 
 /* media queries */
 @media only screen 
