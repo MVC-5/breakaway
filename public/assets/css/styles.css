@@ -51,6 +51,7 @@ h4 {
 
 p,
 td,
+th,
 label {
   font-family: "roboto";
   font-weight: 300;
@@ -278,22 +279,22 @@ p {
 }
 
 /* top-left border-radius */
-table tr:first-child td:first-child {
+.t-request tr:first-child td:first-child {
   border-top-left-radius: var(--default-border-radius);
 }
 
 /* top-right border-radius */
-table tr:first-child td:last-child {
+.t-request tr:first-child td:last-child {
   border-top-right-radius: var(--default-border-radius);
 }
 
 /* bottom-left border-radius */
-table tr:last-child td:first-child {
+.t-request tr:last-child td:first-child {
   border-bottom-left-radius: var(--default-border-radius);
 }
 
 /* bottom-right border-radius */
-table tr:last-child td:last-child {
+.t-request tr:last-child td:last-child {
   border-bottom-right-radius: var(--default-border-radius);
 }
 
@@ -427,7 +428,7 @@ td.t-denied {
 /* calendar partial */
 .calendar {
   width: 360px;
-  margin: 0 auto;
+  margin: 0 auto 50px;
 }
 
 .month {
@@ -451,7 +452,7 @@ td.t-denied {
   margin: 15px;
 }
 /* current vacations calendar */
-.days{
+.days {
   display: inline-flex;
   flex-wrap: wrap;
   margin: 5px;
@@ -503,6 +504,11 @@ td.t-denied {
   color: var(--alert-color);
 }
 
+/* calendar border fix */
+td.cal-day {
+  border-radius: 0;
+}
+
 .modal {
   text-align: center;
   padding: 25px 45px;
@@ -550,9 +556,7 @@ td.t-denied {
 }
 
 /* media queries */
-@media only screen 
-and (max-device-width: 920px) 
-and (-webkit-min-device-pixel-ratio: 2) {
+@media only screen and (max-device-width: 920px) and (-webkit-min-device-pixel-ratio: 2) {
   .hero {
     width: 330px;
   }

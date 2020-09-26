@@ -5,19 +5,20 @@
     </div>
     <h3>Manager Dashboard</h3>
   </div>
-
-  <p class="request-p secondary">Your Team's Pending Requests: </p>
+  <p class="request-p secondary aHead">Your Team's Pending Requests: </p>
   <br/>
+
+
 
   <div class= "wider-view">
 
   {{#each employeeRequests}}
   {{#unless ogStat}}
-  <div class= "manager-table">
+  <div class="aRequest manager-table">
     <p class="requester">{{name}} | {{role}}
     <p>
     <section class="view-table">
-      <p>Bank: {{bank}}</p>
+      <p>PTO Days Remaining: {{bank}}</p>
       <table class="t-request">
         <tr class="t-row">
           <td class="t-days">Days: <span class="days-requested">{{duration}}</span></td>
@@ -50,15 +51,16 @@
   </div>
 
   <br />
+  {{> calendar}}
   <br />
-  <p class="request-p secondary">Your Team's Approved and Denied Requests: </p>
+  <p class="request-p secondary bHead">Your Team's Approved and Denied Requests: </p>
   <br />
 
   <div class= "wider-view">
 
   {{#each employeeRequests}}
   {{#if ogStat}}
-  <div class= "manager-table">
+  <div class="bRequest manager-table">
     <p class="requester">{{name}} | {{role}}
     <p>
     <section class="view-table">
@@ -94,11 +96,6 @@
   </div>
   {{/if}}
   {{/each}}
-  </div>
-
-  <p class="request-p primary">Next 4 Weeks Schedule: </p>
-  <br/>
-  {{> calendar}}
 </div>
 
 <script src="/assets/js/manager.js"></script>

@@ -1,50 +1,9 @@
 // routes for the manager page and queries for data
-const nodemailer = require('nodemailer');
+const moment = require('moment');
 const db = require('../models');
+const sendEmail = require('../email');
 
 module.exports = (app) => {
-  function sendEmployeeEmail(req) {
-    let decision = req.body.reqStatus;
-    if (decision === '0') {
-      decision = 'denied';
-    } else if (decision === '1') {
-      decision = 'approved';
-    }
-    // Creating output string
-    const output = `
-        <p>Hello!</p>
-        <p>You are receiving this email because your manager has made an update to your recent Breakaway request.
-        <p>Your request for dates ${req.body.start} through ${req.body.end} has been ${decision} by your manager. To view your recent request, please visit the <a href="https://breakaway-vacay.herokuapp.com/">Breakaway</a> portal.</p>
-        <p>Thank you for using Breakaway!</p>
-        `;
-
-    // async..await is not allowed in global scope, must use a wrapper
-    async function mainEmail() {
-      // create reusable transporter object using the default SMTP transport
-      const transporter = nodemailer.createTransport({
-        service: 'gmail',
-        auth: {
-          user: 'dev.breakaway@gmail.com', // gmail user - implement npm dotenv + .env file
-          pass: process.env.EMAIL_PASS, // gmail password - implement npm dotenv + .env file
-        },
-      });
-
-      // send mail with defined transport object
-      const info = await transporter.sendMail({
-        from: 'dev.breakaway@gmail.com', // sender address
-        to: req.body.email, // list of receivers
-        cc: 'dev.breakaway@gmail.com',
-        subject: 'Breakaway Request Update', // Subject line
-        text: 'This is a breakaway test', // plain text body
-        html: output, // html body
-      });
-
-      // DO NOT REMOVE THE LINE BELOW
-      console.log('Email sent: %s', info.messageId);
-      // DO NOT REMOVE THE LINE ABOVE
-    }
-    mainEmail().catch(console.error);
-  }
   // login before viewing/making requests
   app.get('/manager-access', (req, res) => {
     res.render('login', { manager: true });
@@ -79,12 +38,12 @@ module.exports = (app) => {
                 const { email } = emp;
                 const role = emp.role.dataValues.title;
                 const { bank } = emp;
-                const { start, end } = empReq;
-                const { createdAt } = empReq;
+                let { start, end } = empReq;
+                start = moment(start).format('MM/DD/YYYY');
+                end = moment(end).format('MM/DD/YYYY');
                 const reqId = empReq.id;
                 const { duration } = empReq;
-                const stringCreatedAt = createdAt.toString();
-                const reqDate = stringCreatedAt.slice(0, (stringCreatedAt.length - 42));
+                const reqDate = moment(empReq.createdAt).format('MM/DD/YYYY');
                 let { reason } = empReq;
                 // original status
                 let ogStat = empReq.approved;
@@ -121,7 +80,22 @@ module.exports = (app) => {
   app.put('/api/manager/update', (req, res) => {
     const status = parseInt(req.body.reqStatus, 10);
     const requestId = parseInt(req.body.reqId, 10);
-    sendEmployeeEmail(req);
+    let decision = req.body.reqStatus;
+    if (decision === '0') {
+      decision = 'denied';
+    } else if (decision === '1') {
+      decision = 'approved';
+    }
+    // Creating output string
+    const output = `
+        <p>Hello!</p>
+        <p>You are receiving this email because your manager has made an update to your recent Breakaway request.
+        <p>Your request for dates ${req.body.start} - ${req.body.end} has been ${decision} by your manager. To view your recent request, please visit the <a href="https://breakaway-vacay.herokuapp.com/">Breakaway</a> portal.</p>
+        <p>Thank you for using Breakaway!</p>
+        `;
+    const subj = 'Breakaway Request Update';
+    const { email } = req.body;
+    sendEmail(subj, email, output);
     db.request.update(
       {
         approved: status,
