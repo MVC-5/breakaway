@@ -81,7 +81,6 @@ module.exports = (app) => {
             }
             if (endDate >= moment(getDate()).format('MM/DD/YYYY')) {
               // only show dates that are upcoming
-              console.log(endDate);
               upcomingRequests.push({
                 dateCreated, startDate, endDate, duration, reqDate, status,
               });
