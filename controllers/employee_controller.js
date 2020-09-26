@@ -1,7 +1,6 @@
 const db = require('../models');
 
-// Module exports for employee controller
-
+// util for employee management
 module.exports = (app) => {
   app.post('/api/employee', (req, res) => {
     const data = req.body;

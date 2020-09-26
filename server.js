@@ -18,20 +18,21 @@ app.use(express.static('public'));
 app.engine('handlebars', exphbs({ defaultLayout: 'main' }));
 app.set('view engine', 'handlebars');
 
-// app.get('/', (req, res) => res.render('index'));
-
+// all the good stuff here
 require('./controllers/feed_controller')(app);
 require('./controllers/request_controller')(app);
 require('./controllers/manager_controller')(app);
 require('./controllers/calendar_controller')(app);
 require('./controllers/employee_controller')(app);
 
+// catch all rendering 404 page
 app.get('/*', (req, res) => {
   const msg = { msg: 'Nothing to see here..' };
   res.render('404', msg);
 });
 
 // Syncing our database and logging a message to the user upon success
+// add force:true to rebuild tables
 db.sequelize.sync({}).then(() => {
   app.listen(PORT, () => {
     console.log(

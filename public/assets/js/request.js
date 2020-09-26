@@ -21,6 +21,7 @@ $(document).ready(() => {
     console.log('submit');
     const manId = $('.request-btn').attr('data-manId');
     const formData = $('.request-form').serializeArray().reduce((obj, item) => {
+      // eslint-disable-next-line no-param-reassign
       obj[item.name] = item.value;
       return obj;
     }, {});

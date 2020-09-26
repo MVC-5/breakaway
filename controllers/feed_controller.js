@@ -11,7 +11,9 @@ const storage = multer.diskStorage({
   },
 });
 
-const imageFilter = function (req, file, cb) {
+// not sure how to fix below error today
+// eslint-disable-next-line consistent-return
+const imageFilter = (req, file, cb) => {
   // accept image files only
   if (!file.originalname.match(/\.(jpg|jpeg|png)$/i)) {
     return cb(new Error('Only image files are allowed!'), false);

@@ -1,5 +1,6 @@
 const nodemailer = require('nodemailer');
 
+// imported to manager_controller
 module.exports = function sendEmail(subj, email, output) {
   // async..await is not allowed in global scope, must use a wrapper
   async function mainEmail() {

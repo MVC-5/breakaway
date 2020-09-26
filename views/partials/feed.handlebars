@@ -1,6 +1,6 @@
 
 <section class="container post-group">
-
+{{!-- Modal for posting new breakaway --}}
 <div id="new-post" class="modal">
   <form action="/api/new-post" method="post" enctype="multipart/form-data">
     <label class="login-label" for="employeeId">What's your employee id?</label>
@@ -14,7 +14,6 @@
       <button id="feed-form" class="btn modal-btn">Submit!</button>
     </div>
   </form>
-  {{!-- <a href="#" rel="modal:close">Close</a> --}}
 </div>
 
 
@@ -32,7 +31,6 @@
 
       <p class="author">
         <span class="name">{{employeeName}}</span> &nbsp/&nbsp
-        {{!-- <span class="department">Sales</span> &nbsp/&nbsp --}}
         <span class="date">{{formatDate}}</span>
       </p>
       
