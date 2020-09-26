@@ -4,6 +4,17 @@
 
 # Breakaway
 
+  ## Table of Contents
+  - [Project description and concept](#project-description)
+  - [User story](#user-story)
+  - [Installation](#installation)
+  - [Features](#features)
+  - [Application preview](#application-preview)
+  - [Tech stack](#technology-and-framework)
+  - [Contributing](#contributing)
+  - [Questions and future development](#questions)
+  - [License](#license)
+
   ## Project Description
   **Breakaway** is an app that increases productivity by helping create a culture and community of taking breaks. Track employee PTO and share employee experiences across your company with this fun and seamless user experience.
 
@@ -17,7 +28,7 @@
 
   **Breakaway** helps companies to build a culture of balance in life, encouraging employees to use PTO, creating a more cohesive work environment where employees share their experiences and bond with their coworkers.
 
-  [Deployment URL](https://breakaway-vacay.herokuapp.com)
+  [Try Breakaway now on Heroku](https://breakaway-vacay.herokuapp.com)
 
   
 
@@ -31,14 +42,6 @@
   - I want the process of requesting PTO to be as frictionless as possible, even fun
   - So that I feel supported in taking time off to recharge and maintain good health
   - - -
-
-  ## Table of Contents
-  - [Installation](#installation)
-  - [Features](#features)
-  - [License](#license)
-  - [Contributing](#contributing)
-  - [Tests](#tests)
-  - [Questions](#questions)
 
   ## Installation
   The **Breakaway** app is hosted on heroku, no special installation is required other than a web browser for mobile or desktop devices. ([**Google Chrome**](https://www.google.com/chrome/?brand=CHBD&gclid=Cj0KCQjwv7L6BRDxARIsAGj-34pI6kcGFGrZkxQgztLSwZZ7JzwQJFBfDBdgTHCurYEpg3QscMjHhYUaAkkjEALw_wcB&gclsrc=aw.ds) is recommended).
@@ -56,7 +59,7 @@
 
   ![iPhone](demo/breakaway-2.png)
 
-  ## Technology & Framework
+  ## Technology and Framework
   - Express
   - Handlebars
   - MySQL
@@ -66,12 +69,11 @@
   - Cloudinary
   - Dotenv
   - Moment
+  - Nodemailer
 
-
-  ## License
-   MIT
 
   ## Contributing
+  - This project was created by [Jon](https://github.com/JonPhoenix), [Caleb](https://github.com/calebkirkish), [Luke](https://github.com/ShepLT1), [Dan](https://github.com/DanGillette25), and [Josh](https://github.com/zapponejosh/)
   - This app is licensed under the MIT licensing model.  Feel free to fork the repo or clone it locally to your machine and make whatever changes you'd like.
 
   ## Questions
@@ -83,4 +85,8 @@
   - Ability for employee to update a previously submitted request
   - Get rid of using moment in favor of JavaScript date objects
   - Passwords, logins and session storage
+  - Allow for likes and comments in the Breakaway feed
+  
+ ## License
+   MIT
 
