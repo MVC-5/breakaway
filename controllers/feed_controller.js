@@ -29,8 +29,10 @@ cloudinary.config({
 // main page feed routes and queries. including display queries and make new post
 const db = require('../models');
 
-module.exports = function (app) {
+module.exports = (app) => {
+  // home route
   app.get('/', (req, res) => {
+    // fetching all posts for feed
     db.feed.findAll({ include: [{ model: db.employee }] }).then((feedData) => {
       const postArray = [];
       feedData.forEach((post) => {
@@ -48,7 +50,7 @@ module.exports = function (app) {
     });
   });
 
-  // frontend can hit this to update feed
+  // just a utility
   app.get('/api/feed', (req, res) => {
     db.feed.findAll({}).then((feedData) => {
       console.log(feedData);
@@ -56,9 +58,10 @@ module.exports = function (app) {
     });
   });
 
+  // creates new post and reloads page
   app.post('/api/new-post', upload.single('image'), async (req, res) => {
     console.log(req.body);
-
+    // does employee exist?
     const exists = await db.employee.findAll({ where: { id: req.body.employeeId } });
     console.log(exists);
     if (exists.length) {
@@ -77,6 +80,7 @@ module.exports = function (app) {
             res.redirect('back');
           });
       });
+      // if no employee id found render 404 page
     } else {
       res.render('404', { msg: `Oh no! No employee found for id ${req.body.employeeId}.` });
     }
