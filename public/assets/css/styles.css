@@ -189,6 +189,7 @@ p {
 .content {
   margin-left: 10px;
   margin-top: 10px;
+  width: 100%;
 }
 
 .location {
@@ -210,7 +211,7 @@ p {
   line-height: 1.25rem;
   margin: 0 10px 10px 0;
   display: flex;
-  justify-content: flex-end;
+  justify-content: flex-start;
 }
 
 /* Form styles */
@@ -238,6 +239,8 @@ p {
   padding: 12px;
   margin: 0 2px;
   border-color: var(--primary-color);
+  font-family: "roboto";
+  font-weight: 300;
 }
 
 .field:disabled {
@@ -340,7 +343,7 @@ td.t-denied {
   justify-content: center;
   flex-wrap: wrap;
   text-align: center;
-  margin: 10vh auto;
+  margin: 20vh auto;
 }
 
 .hero > * {
@@ -445,6 +448,9 @@ td.t-denied {
   padding: 40px;
 }
 
+.manager-table {
+  margin: 15px;
+}
 /* current vacations calendar */
 .days {
   display: inline-flex;
@@ -501,6 +507,52 @@ td.t-denied {
 /* calendar border fix */
 td.cal-day {
   border-radius: 0;
+}
+
+.modal {
+  text-align: center;
+  padding: 25px 45px;
+  height: 400px;
+  width: 350px;
+  background-color: var(--primary-color);
+  border-radius: var(--default-border-radius);
+}
+
+.modal .field {
+  width: 100%;
+  margin: 8px auto 15px;
+  display: inline-block;
+}
+
+.modal-btn {
+  font-size: 0.8rem;
+  color: var(--light-primary-color);
+  background-color: var(--secondary-color);
+  box-shadow: none;
+}
+
+.choose-file {
+  width: 100%;
+  margin: 8px auto 15px;
+  display: inline-block;
+  color: var(--light-primary-color);
+}
+
+.share {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  text-align: center;
+  margin: auto;
+}
+
+.share-link {
+  font-family: "comfortaa";
+  font-weight: 700;
+  font-size: 1.2rem;
+  line-height: 40px;
+  color: var(--primary-color);
+  letter-spacing: 0.1em;
 }
 
 /* media queries */
