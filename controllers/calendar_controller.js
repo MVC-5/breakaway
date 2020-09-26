@@ -28,7 +28,7 @@ function getDates(results) {
 
     const endDate = moment(arr[i].end, 'YYYY-MM-DD');
     const range = moment.range(startDate, endDate);
-    nextArr.push(Array.from(range.by('days', { excludeEnd: false })).map((m) => m.format('ddd-YYYY-MM-DD')));
+    nextArr.push(Array.from(range.by('days')).map((m) => m.format('ddd-YYYY-MM-DD')));
   }
 
   const flatArray = nextArr.flat();
